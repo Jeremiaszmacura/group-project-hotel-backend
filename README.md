@@ -1,3 +1,5 @@
+<hr>
+
 <!-- Heading -->
 # Web application - student project
 
@@ -8,9 +10,9 @@
 
 * ### Work methodology: SCRUM (Github project tab)
 
-* ### Technologies: Node.js, MongoDB, Mongoose
+* ### Technologies: Node.js, Express.js, MongoDB, Mongoose
 
-</hr>
+<hr>
 
 # Documentation:
 
@@ -35,3 +37,8 @@
                         |___controllers -> all business logic
                         |_____tests__ -> unit tests, integration Tests, ...
 </pre>
+<hr>
+
+# Developing rules:
+<!-- UL-->
+* ### branch namespace: feature or fix + "/" + the first part of issue title, for example: feature/backend-04, fix/backend-11, feature/documentation-02, ...
