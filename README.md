@@ -14,6 +14,8 @@
 
 # Documentation:
 
+## Database schema:
+![database-schema](group-project-hotel.drawio.png)
 ## Catalog structure:
 
 <pre>
