@@ -18,6 +18,26 @@
 
 ## Database schema:
 ![database-schema](group-project-hotel.drawio.png)
+# API:
+| Users    | Booking | Room |Comment |
+| -------- |---| ------- |------- |
+| `GET` /users | `GET` /bookings | `GET` /rooms |`GET` /comments |
+| `GET` /users/id | `GET` /bookings/id | `GET` /rooms/id |`POST` /comments |
+| `POST` /users | `POST` /bookings | `GET` /rooms/where/parameters |`PUT` /comments/id |
+| `PUT` /users/id | `PUT` /bookings/id | `POST` /rooms |`DELETE` /comments/id |
+| `DELETE` /users/id | `DELETE` /bookings/id | `PUT` /rooms/id |
+| | | `DELETE` /rooms/id |
+
+| Restaurant |Table |
+| ------- | ------- | 
+| `GET` /restaurant/menu |`GET` /tables |
+| `GET` /restaurant/dish/id |`GET` /tables/id | 
+| `GET` /restaurant/openHours |`GET` /tables/available/parameters |
+| `POST` /restaurant/dish |`POST` /tables  |
+| `PATCH` /restaurant |`PUT` /tables/id  |
+| `PUT` /restaurant/dish/id |`DELETE` /tables/id  |
+| `DELETE` /restaurant/dish/id |
+
 ## Catalog structure:
 
 <pre>
