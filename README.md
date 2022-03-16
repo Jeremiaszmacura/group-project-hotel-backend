@@ -24,9 +24,13 @@
 | `GET` /users | `GET` /bookings | `GET` /rooms |`GET` /comments |
 | `GET` /users/id | `GET` /bookings/id | `GET` /rooms/id |`POST` /comments |
 | `POST` /users | `POST` /bookings | `GET` /rooms/where/parameters |`PUT` /comments/id |
-| `PUT` /users/id | `PUT` /bookings/id | `POST` /rooms |`DELETE` /comments/id |
+| `PUT` /users/id | `PUT` /bookings/id | `GET` /rooms/category |`DELETE` /comments/id |
 | `DELETE` /users/id | `DELETE` /bookings/id | `PUT` /rooms/id |
-| | | `DELETE` /rooms/id |
+| | | `POST` /rooms/category |
+| | | `POST` /rooms |
+| | | `PATCH` /rooms/category/id |
+| | | `DELETE` /rooms/category/id |
+
 
 | Restaurant |Table |
 | ------- | ------- | 
@@ -34,9 +38,11 @@
 | `GET` /restaurant/dish/id |`GET` /tables/id | 
 | `GET` /restaurant/openHours |`GET` /tables/available/parameters |
 | `POST` /restaurant/dish |`POST` /tables  |
-| `PATCH` /restaurant |`PUT` /tables/id  |
-| `PUT` /restaurant/dish/id |`DELETE` /tables/id  |
+| `POST` /restaurant |`PUT` /tables/id  |
+| `PATCH` /restaurant |`DELETE` /tables/id  |
+| `PUT` /restaurant/dish/id |
 | `DELETE` /restaurant/dish/id |
+
 
 ## Catalog structure:
 
