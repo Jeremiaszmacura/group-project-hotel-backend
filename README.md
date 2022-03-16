@@ -32,13 +32,13 @@
 | | | `DELETE` /rooms/category/id |
 
 
-| Restaurant |Table |
-| ------- | ------- | 
-| `GET` /restaurant/menu |`GET` /tables |
-| `GET` /restaurant/dish/id |`GET` /tables/id | 
-| `GET` /restaurant/openHours |`GET` /tables/available/parameters |
-| `POST` /restaurant/dish |`POST` /tables  |
-| `POST` /restaurant |`PUT` /tables/id  |
+| Restaurant | Table | Reservation |
+| ------- | ------- |  --- |
+| `GET` /restaurant/menu |`GET` /tables | `GET` /reservation |
+| `GET` /restaurant/dish/id |`GET` /tables/id | `GET` /reservation/id |
+| `GET` /restaurant/openHours |`GET` /tables/available/parameters |`POST` /reservation |
+| `POST` /restaurant/dish |`POST` /tables  |`PUT` /reservation/id |
+| `POST` /restaurant |`PUT` /tables/id  |`DELETE` /reservation/id |
 | `PATCH` /restaurant |`DELETE` /tables/id  |
 | `PUT` /restaurant/dish/id |
 | `DELETE` /restaurant/dish/id |
