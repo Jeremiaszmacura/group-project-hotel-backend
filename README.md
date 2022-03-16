@@ -42,6 +42,7 @@
 | `PATCH` /restaurant |`DELETE` /tables/id  |
 | `PUT` /restaurant/dish/id |
 | `DELETE` /restaurant/dish/id |
+| `DELETE` /restaurant/id |
 
 
 ## Catalog structure:
