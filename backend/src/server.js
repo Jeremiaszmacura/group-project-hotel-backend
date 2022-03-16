@@ -6,6 +6,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 
 // IMPORT INTERNAL LIBRARIES
+const userRoutes = require('./routes/userRoutes')
 
 // VARIABLES
 const app = express()
@@ -17,6 +18,7 @@ app.use(express.json()) // all data send to api will be able to access as a json
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
+app.use('/users', userRoutes)
 app.use((req, res) => {
   res.status(404).send('404 Error')
 })
