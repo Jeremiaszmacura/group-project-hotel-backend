@@ -13,17 +13,20 @@ const getAll = (req, res) => {
   })
 }
 
-const createUser = async (req, res) => {
-  const user = await User.create({
-    name: 'janek',
-    surname: 'Kowalski',
-    phoneNumber: '111222333',
-    address: 'adress',
-    email: 'email@email.com',
-    password: '1234',
-    role: 'CUSTOMER'
-  })
-  res.json(user)
+const createUser = (req, res) => {
+  const user = new User(req.body)
+
+  user.save()
+    .then((data) => {
+      res.json(`Account for email: ${data.email} has beed created. Welcome ${data.name}!`)
+    })
+    .catch((error) => {
+      console.log(error)
+      if (error.code === 11000) {
+        return res.json('This email is already in use')
+      }
+      return res.json('something went wrong')
+    })
 }
 
 module.exports = {

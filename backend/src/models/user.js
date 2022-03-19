@@ -2,51 +2,8 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const bcrypt = require('bcrypt')
 
-const BookingSchema = new Schema({
-  startsAt: {
-    type: Date,
-    required: 'Kindly enter the start date for booking'
-  },
-  endsAt: {
-    type: Date,
-    required: 'Kindly enter the end date for booking'
-  },
-  price: {
-    type: Number,
-    default: 0
-  },
-  comment: {
-    type: String
-  },
-  numberOfPeople: {
-    type: Number,
-    default: 1,
-    required: 'Kindly enter the number of people for booking'
-  },
-  names: [{
-    type: String
-  }],
-  rooms: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Room'
-  }]
-}, { timestamps: true })
-
-const ReservationSchema = new Schema({
-  startsAt: {
-    type: Date,
-    required: 'Kindly enter the start date for reservation'
-  },
-  numberOfPeople: {
-    type: Number,
-    default: 1,
-    required: 'Kindly enter the number of people for reservation'
-  },
-  tables: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Table'
-  }]
-}, { timestamps: true })
+const { BookingSchema } = require('./booking')
+const { ReservationSchema } = require('./reservation')
 
 const UserSchema = new Schema({
   name: {
@@ -78,9 +35,8 @@ const UserSchema = new Schema({
   },
   password: {
     type: String,
-    required: 'Kindly enter the user passowrd',
-    minlength: 8,
-    match: [/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/, 'Please fill a valid user password. Valid password should containt at least: one number, one special character']
+    select: false,
+    required: 'Kindly enter the user passowrd'
   },
   role: {
     type: String,
@@ -111,12 +67,6 @@ UserSchema.methods.verifyPassword = async function (password) {
   return await bcrypt.compare(password, this.password)
 }
 
-const Booking = mongoose.model('Booking', BookingSchema)
-const Reservation = mongoose.model('Reservation', ReservationSchema)
 const User = mongoose.model('User', UserSchema)
 
-module.exports = {
-  Booking,
-  Reservation,
-  User
-}
+module.exports = { User }
