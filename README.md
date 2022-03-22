@@ -23,10 +23,10 @@
 | -------- |---| ------- |------- |
 | `GET` /users | `GET` /bookings | `GET` /rooms |`GET` /comments |
 | `GET` /users/id | `GET` /bookings/id | `GET` /rooms/id |`POST` /comments |
-| `POST` /users | `POST` /bookings | `GET` /rooms/where/parameters |`PUT` /comments/id |
-| `PUT` /users/id | `PUT` /bookings/id | `GET` /rooms/category |`DELETE` /comments/id |
-| `DELETE` /users/id | `DELETE` /bookings/id | `PUT` /rooms/id |
-| | | `POST` /rooms/category |
+| `POST` /users | `GET` /bookings/search/parameters | `GET` /rooms/search/parameters |`PUT` /comments/id |
+| `PUT` /users/id | `POST` /bookings | `GET` /rooms/category |`DELETE` /comments/id |
+| `DELETE` /users/id | `PUT` /bookings/id | `PUT` /rooms/id |
+| | `DELETE` /bookings/id | `POST` /rooms/category |
 | | | `POST` /rooms |
 | | | `PATCH` /rooms/category/id |
 | | | `DELETE` /rooms/category/id |
@@ -36,10 +36,10 @@
 | ------- | ------- |  --- |
 | `GET` /restaurant/menu |`GET` /tables | `GET` /reservation |
 | `GET` /restaurant/dish/id |`GET` /tables/id | `GET` /reservation/id |
-| `GET` /restaurant/openHours |`GET` /tables/available/parameters |`POST` /reservation |
-| `POST` /restaurant/dish |`POST` /tables  |`PUT` /reservation/id |
-| `POST` /restaurant |`PUT` /tables/id  |`DELETE` /reservation/id |
-| `PATCH` /restaurant |`DELETE` /tables/id  |
+| `GET` /restaurant/openHours |`GET` /tables/search/parameters | `GET` /reservation/search/parameters |
+| `POST` /restaurant/dish |`POST` /tables  | `POST` /reservation |
+| `POST` /restaurant |`PUT` /tables/id  | `PUT` /reservation/id |
+| `PATCH` /restaurant |`DELETE` /tables/id  |`DELETE` /reservation/id |
 | `PUT` /restaurant/dish/id |
 | `DELETE` /restaurant/dish/id |
 | `DELETE` /restaurant/id |
