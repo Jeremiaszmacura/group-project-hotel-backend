@@ -10,7 +10,7 @@ const userRoutes = require('./routes/userRoutes')
 
 // VARIABLES
 const app = express()
-const port = process.env.PORT || 4000;  // eslint-disable-line
+const port = process.env.APP_PORT || 4000;  // eslint-disable-line
 
 // MIDDLEWARE
 app.use(express.urlencoded({ extended: false })) // takes all url encoded data and parse to object, which we can use in request object (req.body)
@@ -27,15 +27,28 @@ app.use(function (err, req, res) {
   res.status(500).send('500 Server Error')
 })
 
+// if (require.main === module) {
+//     mongoose.connect(process.env.DATABASE_URL)  // eslint-disable-line
+//     .then(() => app.listen(port, () => {
+//       console.log(`[SERVER] listening on port ${port}...`) // after successful connection with database, sever start listening
+//       console.log(`[SERVER] URL: http://localhost:${port}`)
+//       console.log(`[SERVER] Database state: ${mongoose.connection.readyState}`)
+//     }))
+//     .catch((err) => console.log(err))
+// }
+
 // CONNECT TO DATABASE AND RUN SERVER
-if (require.main === module) {
-    mongoose.connect(process.env.DATABASE_URL)  // eslint-disable-line
-    .then(() => app.listen(port, () => {
-      console.log(`[SERVER] listening on port ${port}...`) // after successful connection with database, sever start listening
-      console.log(`[SERVER] URL: http://localhost:${port}`)
-      console.log(`[SERVER] Database state: ${mongoose.connection.readyState}`)
-    }))
-    .catch((err) => console.log(err))
-}
+// require('./config/mongooseLocalDB')
+require('./config/mongooseAtlasDB')
+
+mongoose.connection.on('open', function () {
+  app.listen(port, function () {
+    console.log(`Hotel RESTful API server started on: http://localhost:${port}`)
+  })
+})
+
+mongoose.connection.on('error', function (err) {
+  console.error('DB connection error ' + err)
+})
 
 module.exports = app
