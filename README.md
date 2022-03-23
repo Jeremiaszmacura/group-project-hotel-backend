@@ -23,7 +23,7 @@
 | -------- |---| ------- |------- |
 | `GET` /users | `GET` /bookings | `GET` /rooms |`GET` /comments |
 | `GET` /users/id | `GET` /bookings/id | `GET` /rooms/id |`POST` /comments |
-| `POST` /users | `GET` /bookings/search/parameters | `GET` /rooms/search/parameters |`PUT` /comments/id |
+| `POST` /users/signup | `GET` /bookings/search/parameters | `GET` /rooms/search/parameters |`PUT` /comments/id |
 | `PUT` /users/id | `POST` /bookings | `GET` /rooms/category |`DELETE` /comments/id |
 | `DELETE` /users/id | `PUT` /bookings/id | `PUT` /rooms/id |
 | | `DELETE` /bookings/id | `POST` /rooms/category |
