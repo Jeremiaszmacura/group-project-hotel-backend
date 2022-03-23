@@ -36,11 +36,10 @@
 | ------- | ------- |  --- |
 | `GET` /restaurant/menu |`GET` /tables | `GET` /reservation |
 | `GET` /restaurant/dish/id |`GET` /tables/id | `GET` /reservation/id |
-| `GET` /restaurant/openHours |`GET` /tables/search/parameters | `GET` /reservation/search/parameters |
-| `POST` /restaurant/dish |`POST` /tables  | `POST` /reservation |
-| `POST` /restaurant |`PUT` /tables/id  | `PUT` /reservation/id |
-| `PATCH` /restaurant |`DELETE` /tables/id  |`DELETE` /reservation/id |
-| `PUT` /restaurant/dish/id |
+| `POST` /restaurant/dish |`GET` /tables/search/parameters | `GET` /reservation/search/parameters |
+| `POST` /restaurant |`POST` /tables  | `POST` /reservation |
+| `PATCH` /restaurant |`PUT` /tables/id  | `PUT` /reservation/id |
+| `PUT` /restaurant/dish/id |`DELETE` /tables/id  |`DELETE` /reservation/id |
 | `DELETE` /restaurant/dish/id |
 | `DELETE` /restaurant/id |
 
@@ -65,6 +64,12 @@
                         |_____tests__ -> unit tests, integration Tests, ...
 </pre>
 <hr>
+
+### Indexes for MongoDB:
+* #### Booking: startsAt, endsAt
+* #### Reservation: startsAt, endsAt
+* #### Rooms: features, price
+* #### Users: email, role
 
 # Developing rules:
 <!-- UL-->
