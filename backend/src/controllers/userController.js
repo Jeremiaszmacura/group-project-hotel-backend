@@ -13,6 +13,10 @@ const getAll = (req, res) => {
   })
 }
 
+const getOne = (req, res) => {
+  return res.json('getOne')
+}
+
 const createUser = (req, res) => {
   const user = new User(req.body)
 
@@ -29,7 +33,18 @@ const createUser = (req, res) => {
     })
 }
 
+const updateUser = (req, res) => {
+  return res.json('updateUser')
+}
+
+const removeUser = (req, res) => {
+  return res.json('removeUser')
+}
+
 module.exports = {
   getAll,
-  createUser
+  getOne,
+  createUser,
+  updateUser,
+  removeUser
 }
