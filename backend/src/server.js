@@ -50,8 +50,8 @@ app.use(function (err, req, res) {
 // }
 
 // CONNECT TO DATABASE AND RUN SERVER
-// require('./config/mongooseLocalDB')
-require('./config/mongooseAtlasDB')
+require('./config/mongooseLocalDB')
+// require('./config/mongooseAtlasDB')
 
 mongoose.connection.on('open', function () {
   app.listen(port, function () {

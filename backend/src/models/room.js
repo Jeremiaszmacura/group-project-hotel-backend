@@ -7,7 +7,8 @@ const RoomSchema = new Schema({
   number: {
     type: Number,
     required: 'Kindly enter the number for room',
-    unique: true
+    unique: true,
+    parse: true
   },
   price: {
     type: Number,

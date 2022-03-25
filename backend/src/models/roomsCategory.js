@@ -7,7 +7,9 @@ const RoomsCategorySchema = new Schema({
   name: {
     type: String,
     enum: ['deluxe', 'standard'],
-    required: 'Kindly enter the name for restaurant'
+    required: 'Kindly enter the name for restaurant',
+    unique: true,
+    parse: true
   },
   features: {
     type: [String]
