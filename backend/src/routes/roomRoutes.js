@@ -12,6 +12,5 @@ router.post('/', roomController.createRoom)
 router.patch('/category/:id', roomController.updateCategory)
 router.put('/:id', roomController.updateRoom)
 router.delete('/category/:id', roomController.removeCategory)
-// Zmienić kolejność w README.md
 
 module.exports = router

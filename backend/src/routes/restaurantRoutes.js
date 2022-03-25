@@ -3,14 +3,13 @@ const restaurantController = require('../controllers/restaurantController')
 
 const router = express.Router()
 
-router.get('/menu/', restaurantController.getMenu)
-router.get('/dish/:id', restaurantController.getDish)
-router.get('/openHours/', restaurantController.getOpenHours)
-router.post('/dish/', restaurantController.createDish)
+router.get('/:id/menu/', restaurantController.getMenu)
+router.get('/:id/dish/:id', restaurantController.getDish)
+router.post('/:id/dish/', restaurantController.createDish)
 router.post('/', restaurantController.createRestaurant)
-router.patch('/', restaurantController.updateRestaurant)
-router.put('/dish/:id', restaurantController.updateDish)
-router.delete('/dish/:id', restaurantController.removeDish)
-router.delete('/', restaurantController.removeRestaurant) // zmienić w README.md id restaurant wszędzie albo nigdzie
+router.patch('/:id', restaurantController.updateRestaurant)
+router.put('/:id/dish/:id', restaurantController.updateDish)
+router.delete('/:id/dish/:id', restaurantController.removeDish)
+router.delete('/:id', restaurantController.removeRestaurant)
 
 module.exports = router

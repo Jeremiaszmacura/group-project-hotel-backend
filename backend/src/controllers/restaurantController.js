@@ -6,10 +6,6 @@ const getDish = (req, res) => {
   return res.json('getDish')
 }
 
-const getOpenHours = (req, res) => {
-  return res.json('getOpenHours')
-}
-
 const createDish = (req, res) => {
   return res.json('createDish')
 }
@@ -37,7 +33,6 @@ const removeRestaurant = (req, res) => {
 module.exports = {
   getMenu,
   getDish,
-  getOpenHours,
   createDish,
   createRestaurant,
   updateRestaurant,
