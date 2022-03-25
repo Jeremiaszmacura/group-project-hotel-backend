@@ -6,7 +6,8 @@ const { BedSchema } = require('./bed')
 const RoomSchema = new Schema({
   number: {
     type: Number,
-    required: 'Kindly enter the number for room'
+    required: 'Kindly enter the number for room',
+    unique: true
   },
   price: {
     type: Number,
