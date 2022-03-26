@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
 // MongoDB URI building
-const mongoDBUser = process.env.DATABASE_USERNAME || 'hotel-admin'
-const mongoDBPass = process.env.DATABASE_PASSWORD || 'hotel-admin'
+const mongoDBUser = process.env.DATABASE_USERNAME || 'hotel-user'
+const mongoDBPass = process.env.DATABASE_PASSWORD || 'hotel-user'
 const mongoDBCredentials = (mongoDBUser && mongoDBPass) ? mongoDBUser + ':' + mongoDBPass + '@' : ''
 
 const mongoDBHostname = process.env.DATABASE_HOST || 'localhost'
@@ -18,3 +18,9 @@ mongoose.connect(mongoDBURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
+
+// mongodb://hotel-user:hotel-user@localhost:27017/hotel
+
+
+console.log("#####################################")
+console.log(mongoDBURI)
