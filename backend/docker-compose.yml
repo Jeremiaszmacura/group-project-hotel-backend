@@ -42,24 +42,24 @@ services:
       - mongodb
     restart: always
 
-  hotel-app:
-    image: hotel-app
-    container_name: hotel-app
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    command: npm run start
-    ports:
-      - 4000:4000
-      - 9229:9229
-    volumes:
-      - .:/workspace/server
-      - /workspace/server/node_modules
-    networks:
-      - hotel-network
-    restart: on-failure
-    depends_on:
-      - mongodb
+  # hotel-app:
+  #   image: hotel-app
+  #   container_name: hotel-app
+  #   build:
+  #     context: .
+  #     dockerfile: ./Dockerfile
+  #   command: npm run start
+  #   ports:
+  #     - 4000:4000
+  #     - 9229:9229
+  #   volumes:
+  #     - .:/workspace/server
+  #     - /workspace/server/node_modules
+  #   networks:
+  #     - hotel-network
+  #   restart: on-failure
+  #   depends_on:
+  #     - mongodb
 
 networks:
     hotel-network:

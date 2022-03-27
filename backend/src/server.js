@@ -49,7 +49,7 @@ app.use(function (err, req, res) {
 //     .catch((err) => console.log(err))
 // }
 
-// CONNECT TO DATABASE AND RUN SERVERR
+// CONNECT TO DATABASE AND RUN SERVER
 require('./config/mongooseLocalDB')
 // require('./config/mongooseAtlasDB')
 

@@ -18,9 +18,3 @@ mongoose.connect(mongoDBURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
-
-// mongodb://hotel-user:hotel-user@localhost:27017/hotel
-
-
-console.log("#####################################")
-console.log(mongoDBURI)

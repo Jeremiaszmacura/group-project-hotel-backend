@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 4000
 
-RUN echo 111
+RUN npm start
