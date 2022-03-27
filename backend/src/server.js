@@ -4,6 +4,8 @@ require('dotenv').config()
 // IMPORT EXTERNAL LIBRARIES
 const express = require('express')
 const mongoose = require('mongoose')
+const cors = require('cors')
+const helmet = require('helmet')
 
 // IMPORT INTERNAL LIBRARIES
 const userRoutes = require('./routes/userRoutes')
@@ -16,6 +18,9 @@ const reservationRoutes = require('./routes/reservationRoutes')
 
 // VARIABLES
 const app = express()
+app.use(express.json())
+app.use(cors())
+app.use(helmet())
 const port = process.env.APP_PORT || 4000;  // eslint-disable-line
 
 // MIDDLEWARE
@@ -51,6 +56,7 @@ app.use(function (err, req, res) {
 
 // CONNECT TO DATABASE AND RUN SERVER
 require('./config/mongooseLocalDB')
+require('./config/passport')
 // require('./config/mongooseAtlasDB')
 
 mongoose.connection.on('open', function () {

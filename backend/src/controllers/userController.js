@@ -1,5 +1,69 @@
+const passport = require('passport')
+const jwt = require('jsonwebtoken')
+
 const { User } = require('../models/user')
 
+// Authorization
+const signup = async (req, res, next) => {
+  passport.authenticate('signup', { session: false },
+    async (err, user) => {
+      if (err) {
+        if (err.code === 11000) {
+          return res.json('This email is already in use')
+        }
+        const error = new Error('An error occurred: ' + err)
+        return next(error)
+      }
+      return res.json(user)
+    }
+  )(req, res, next)
+}
+
+const login = async (req, res, next) => {
+  passport.authenticate(
+    'login',
+    async (err, user, info) => {
+      try {
+        if (err) {
+          const error = new Error('An error occurred: ' + err)
+          return next(error)
+        } else if (!user) {
+          return res.status(401).json({ error: info.message })
+        }
+
+        req.login(
+          user,
+          { session: false },
+          async (error) => {
+            if (error) return next(error)
+
+            const body = { _id: user._id, email: user.email }
+            const token = jwt.sign({ user: body }, 'TOP_SECRET')
+
+            return res.json({ token })
+          }
+        )
+      } catch (error) {
+        return next(error)
+      }
+    }
+  )(req, res, next)
+}
+
+const validateUser = async (req, res) => {
+  try {
+    const user = await User.findOneAndUpdate({ _id: req.params.id }, { $set: { validated: 'true' } }, { new: true, runValidators: true })
+    user ? res.json(user) : res.status(404).send()
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(422).send(err)
+    } else {
+      res.status(500).send(err)
+    }
+  }
+}
+
+// All other controllers
 const getAll = (req, res) => {
   User.find({}, (error, data) => {
     if (error) {
@@ -17,22 +81,6 @@ const getOne = (req, res) => {
   return res.json('getOne')
 }
 
-const createUser = (req, res) => {
-  const user = new User(req.body)
-
-  user.save()
-    .then((data) => {
-      res.json(`Account for email: ${data.email} has beed created. Welcome ${data.name}!`)
-    })
-    .catch((error) => {
-      console.log(error)
-      if (error.code === 11000) {
-        return res.json('This email is already in use')
-      }
-      return res.json('something went wrong')
-    })
-}
-
 const updateUser = (req, res) => {
   return res.json('updateUser')
 }
@@ -42,9 +90,11 @@ const removeUser = (req, res) => {
 }
 
 module.exports = {
+  signup,
+  login,
+  validateUser,
   getAll,
   getOne,
-  createUser,
   updateUser,
   removeUser
 }
