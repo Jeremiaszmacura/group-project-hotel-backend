@@ -35,7 +35,6 @@ const UserSchema = new Schema({
   },
   password: {
     type: String,
-    select: false,
     required: 'Kindly enter the user passowrd'
   },
   role: {
@@ -43,6 +42,10 @@ const UserSchema = new Schema({
     enum: ['ADMIN', 'CLERK', 'CUSTOMER'],
     default: 'CUSTOMER',
     required: 'Kindly enter the user role'
+  },
+  validated: {
+    type: Boolean,
+    default: false
   },
   bookings: [BookingSchema],
   reservations: [ReservationSchema]
