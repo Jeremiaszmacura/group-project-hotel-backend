@@ -1,0 +1,67 @@
+version: '3.7'
+
+services:
+
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${DATABASE_ADMIN_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${DATABASE_ADMIN_PASSWORD}
+      - MONGO_INITDB_DATABASE=${DATABASE_NAME}
+    env_file: 
+    - .env
+    ports:
+      - '27017-27019:27017-27019'
+    volumes: 
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./mongo-data:/data/db
+    networks:
+      - hotel-network
+    restart: always
+
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-web-admin
+    ports:
+      - 8080:8081
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+      - ME_CONFIG_MONGODB_PORT=${DATABASE_PORT}
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
+      - ME_CONFIG_MONGODB_AUTH_DATABASE=${DATABASE_NAME}
+      - ME_CONFIG_MONGODB_AUTH_USERNAME=${DATABASE_USERNAME}
+      - ME_CONFIG_MONGODB_AUTH_PASSWORD=${DATABASE_PASSWORD}
+      - ME_CONFIG_BASICAUTH_USERNAME=${MONGOEXPRESS_LOGIN}
+      - ME_CONFIG_BASICAUTH_PASSWORD=${MONGOEXPRESS_PASSWORD}
+    env_file: 
+      - .env
+    networks:
+      - hotel-network
+    depends_on:
+      - mongodb
+    restart: always
+
+  # hotel-app:
+  #   image: hotel-app
+  #   container_name: hotel-app
+  #   build:
+  #     context: .
+  #     dockerfile: ./Dockerfile
+  #   command: npm run start
+  #   ports:
+  #     - 4000:4000
+  #     - 9229:9229
+  #   volumes:
+  #     - .:/workspace/server
+  #     - /workspace/server/node_modules
+  #   networks:
+  #     - hotel-network
+  #   restart: on-failure
+  #   depends_on:
+  #     - mongodb
+
+networks:
+    hotel-network:
+      driver: bridge
+      name: hotel-network
