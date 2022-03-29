@@ -15,4 +15,3 @@ mongoose.connect(mongoDBURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
-// mongodb+srv://hotel-admin:<password>@hotel.munmc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority

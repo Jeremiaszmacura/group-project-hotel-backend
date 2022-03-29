@@ -14,7 +14,7 @@ const getAll = (req, res) => {
 }
 
 const getOne = (req, res) => {
-  Table.findOne({__id: req.params.id}, (error, data) => {
+  Table.findOne({ __id: req.params.id }, (error, data) => {
     if (error) {
       console.log(error)
       return res.json()

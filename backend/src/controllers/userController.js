@@ -31,7 +31,7 @@ const login = async (req, res, next) => {
           return res.status(401).json({ error: info.message })
         }
 
-        req.login(
+        await req.login(
           user,
           { session: false },
           async (error) => {
@@ -78,7 +78,7 @@ const getAll = (req, res) => {
 }
 
 const getOne = (req, res) => {
-  User.findOne({_id: req.params.id}, (error, data) => {
+  User.findOne({ _id: req.params.id }, (error, data) => {
     if (error) {
       console.log(error)
       return res.json()

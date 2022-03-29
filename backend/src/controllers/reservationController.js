@@ -14,7 +14,7 @@ const getAll = (req, res) => {
 }
 
 const getOne = (req, res) => {
-  Reservation.findOne({__id: req.params.id}, (error, data) => {
+  Reservation.findOne({ __id: req.params.id }, (error, data) => {
     if (error) {
       console.log(error)
       return res.json()

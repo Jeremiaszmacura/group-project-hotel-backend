@@ -1,6 +1,6 @@
 const express = require('express')
 const bookingController = require('../controllers/bookingController')
-const { checkIsInRole, isLoggedIn } = require('../middlewares/authMiddleware')
+const { isLoggedIn } = require('../middlewares/authMiddleware')
 
 const router = express.Router()
 
