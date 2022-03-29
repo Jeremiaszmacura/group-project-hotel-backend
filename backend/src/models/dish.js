@@ -21,9 +21,6 @@ const DishSchema = new Schema({
   }
 })
 
-const Dish = mongoose.model('Dish', DishSchema)
-
 module.exports = {
-  Dish,
   DishSchema
 }

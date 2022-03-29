@@ -1,31 +1,11 @@
 const { RoomsCategory } = require('../models/roomsCategory')
-const { Room } = require('../models/room')
 
 const getAll = (req, res) => {
-  Room.find({}, (error, data) => {
-    if (error) {
-      console.log(error)
-      return res.json()
-    }
-    if (!data) {
-      return res.json({ error: 'No room categories in database' })
-    }
-    res.json(data)
-  })
+  return res.json('getAll')
 }
 
 const getOne = (req, res) => {
-  Room.findOne({ __id: req.params.id }, (error, data) => {
-    if (error) {
-      console.log(error)
-      return res.json()
-    }
-
-    if (!data) {
-      return res.json({ error: 'No table in database' })
-    }
-    res.json(data)
-  })
+  return res.json('getOne')
 }
 
 const getRoomsFilter = (req, res) => {

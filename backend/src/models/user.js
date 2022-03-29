@@ -35,7 +35,7 @@ const UserSchema = new Schema({
   },
   password: {
     type: String,
-    required: 'Kindly enter the user passowrd'
+    required: 'Kindly enter the user password'
   },
   role: {
     type: String,

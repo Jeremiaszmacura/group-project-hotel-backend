@@ -9,9 +9,6 @@ const BedSchema = new Schema({
   }
 })
 
-const Bed = mongoose.model('Bed', BedSchema)
-
 module.exports = {
-  Bed,
   BedSchema
 }

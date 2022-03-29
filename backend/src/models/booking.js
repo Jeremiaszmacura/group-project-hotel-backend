@@ -63,9 +63,6 @@ BookingSchema.pre('save', function (callback) {
   callback()
 })
 
-const Booking = mongoose.model('Booking', BookingSchema)
-
 module.exports = {
-  Booking,
   BookingSchema
 }

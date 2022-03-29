@@ -56,7 +56,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"John\",\r\n    \"surname\": \"Kowalsky\",\r\n    \"phoneNumber\": \"123123123\",\r\n    \"address\": \"main street\",\r\n    \"email\": \"email@email.com\",\r\n    \"password\": \"123\",\r\n    \"role\": \"ADMIN\"\r\n}",
+							"raw": "{\r\n    \"name\": \"John\",\r\n    \"surname\": \"Kowalsky\",\r\n    \"phoneNumber\": \"123123123\",\r\n    \"address\": \"main street\",\r\n    \"email\": \"email@email.com\",\r\n    \"password\": \"12345678\",\r\n    \"role\": \"ADMIN\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -199,7 +199,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYyNDJkMDQ4ZGVjNzRiNDg3MGFhMmQwOSIsImVtYWlsIjoiZW1haWxAZW1haWwuY29tIn0sImlhdCI6MTY0ODU0NjM3OX0.x5649L5Fomn7KmmW0p7DtaCTtczJ5bJaGOSYkXdcctY",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYyNDMwMmU1Y2UzNGRmZDkxNmYyMzlmOCIsImVtYWlsIjoiZW1haWxAZW1haWwuY29tIn0sImlhdCI6MTY0ODU1ODg0Nn0.rAlSREQT3UrXBZ_DL1k4lrOBfC1jp1vM5w9M0YEPzlE",
 									"type": "string"
 								}
 							]
@@ -251,7 +251,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYyNDJkMDQ4ZGVjNzRiNDg3MGFhMmQwOSIsImVtYWlsIjoiZW1haWxAZW1haWwuY29tIn0sImlhdCI6MTY0ODU0NjM3OX0.x5649L5Fomn7KmmW0p7DtaCTtczJ5bJaGOSYkXdcctY",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYyNDMwMmU1Y2UzNGRmZDkxNmYyMzlmOCIsImVtYWlsIjoiZW1haWxAZW1haWwuY29tIn0sImlhdCI6MTY0ODU1ODg0Nn0.rAlSREQT3UrXBZ_DL1k4lrOBfC1jp1vM5w9M0YEPzlE",
 									"type": "string"
 								}
 							]
@@ -503,7 +503,34 @@
 		},
 		{
 			"name": "Restaurant",
-			"item": []
+			"item": [
+				{
+					"name": "create restaurant",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"capacity\": 30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/restaurant",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"restaurant"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Table",
