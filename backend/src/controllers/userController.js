@@ -63,12 +63,12 @@ const validateUser = async (req, res) => {
   }
 }
 
-// All other controllers
+// All others controllers
 const getAll = (req, res) => {
   User.find({}, (error, data) => {
     if (error) {
       console.log(error)
-      return res.json()
+      return res.json('something went wrong')
     }
     if (!data) {
       return res.json([{ error: 'No users in database' }])
@@ -81,10 +81,10 @@ const getOne = (req, res) => {
   User.findOne({ _id: req.params.id }, (error, data) => {
     if (error) {
       console.log(error)
-      return res.json()
+      return res.json('something went wrong')
     }
     if (!data) {
-      return res.json({ error: 'No users in database' })
+      return res.json({ error: 'No user in database' })
     }
     res.json(data)
   })

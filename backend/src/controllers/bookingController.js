@@ -7,14 +7,13 @@ const getAll = (req, res) => {
 }
 
 const getUserAll = (req, res) => {
-  console.log(req.user)
   User.findOne({ _id: req.user._id }, (error, data) => {
     if (error) {
       console.log(error)
-      return res.json()
+      return res.json('something went wrong')
     }
     if (!data) {
-      return res.json({ error: 'No users in database' })
+      return res.json({ error: 'No user found' })
     }
     res.json(data.bookings)
   })
@@ -39,7 +38,7 @@ const createBooking = async (req, res) => {
     let roomCalendar
     if (error) {
       console.log(error)
-      return res.json(error)
+      return res.json('something went wrong')
     }
     if (!data) {
       const roomsJson = {
