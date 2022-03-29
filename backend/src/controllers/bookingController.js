@@ -39,8 +39,14 @@ const createBooking = async (req, res) => {
     }
   })
   const allRooms = []
+  for (let room in roomsCategory.rooms) {
+    allRooms.concat(roomsCategory.rooms[room])
+  }
+  console.log(allRooms)
+  console.log(allRooms.length)
 
   RoomsCalendar.find({ date: req.body.date }, (error, data) => {
+    let roomCalendar;
     if (error) {
       console.log(error)
       return res.json()
@@ -50,13 +56,18 @@ const createBooking = async (req, res) => {
         date: req.body.date,
         rooms: []
       }
-      for (let i = 0; i < 31; i++) {
-
+      for (let i = 0; i < allRooms.length; i++) {
+        roomsJson.concat({
+          room: allRooms[i]._id,
+          user: null
+        })
       }
-      const roomCalendar = new RoomsCalendar(req.body.date)
-      return res.json({ error: 'No users in database' })
+      roomCalendar = new RoomsCalendar(roomsJson)
     }
-    res.json(data.bookings)
+    if (!roomCalendar){
+      roomCalendar = data
+    }
+    res.json(roomCalendar)
   })
 }
 
