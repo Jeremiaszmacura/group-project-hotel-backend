@@ -1,9 +1,29 @@
+const { Reservation } = require('../models/reservation')
+
 const getAll = (req, res) => {
-  return res.json('getAll')
+  Reservation.find({}, (error, data) => {
+    if (error) {
+      console.log(error)
+      return res.json()
+    }
+    if (!data) {
+      return res.json({ error: 'No table in database' })
+    }
+    res.json(data)
+  })
 }
 
 const getOne = (req, res) => {
-  return res.json('getOne')
+  Reservation.findOne({__id: req.params.id}, (error, data) => {
+    if (error) {
+      console.log(error)
+      return res.json()
+    }
+    if (!data) {
+      return res.json({ error: 'No table in database' })
+    }
+    res.json(data)
+  })
 }
 
 const getReservationsFilter = (req, res) => {

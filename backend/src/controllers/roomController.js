@@ -15,7 +15,17 @@ const getAll = (req, res) => {
 }
 
 const getOne = (req, res) => {
-  return res.json('getOne')
+  Room.findOne({__id: req.params.id}, (error, data) => {
+    if (error) {
+      console.log(error)
+      return res.json()
+    }
+    
+    if (!data) {
+      return res.json({ error: 'No table in database' })
+    }
+    res.json(data)
+  })
 }
 
 const getRoomsFilter = (req, res) => {

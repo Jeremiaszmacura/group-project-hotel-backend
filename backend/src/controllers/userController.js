@@ -71,14 +71,23 @@ const getAll = (req, res) => {
       return res.json()
     }
     if (!data) {
-      return res.json({ error: 'No users in database' })
+      return res.json([{ error: 'No users in database' }])
     }
-    res.json(data)
+    return res.json(data)
   })
 }
 
 const getOne = (req, res) => {
-  return res.json('getOne')
+  User.findOne({_id: req.params.id}, (error, data) => {
+    if (error) {
+      console.log(error)
+      return res.json()
+    }
+    if (!data) {
+      return res.json({ error: 'No users in database' })
+    }
+    res.json(data)
+  })
 }
 
 const updateUser = (req, res) => {
