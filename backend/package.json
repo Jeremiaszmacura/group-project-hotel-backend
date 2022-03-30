@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon -V src/server.js",
+    "start": "nodemon --legacy-watch --ignore mongo-data -V src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npx eslint ./"
   },
