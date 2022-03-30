@@ -31,7 +31,6 @@ const seedDB = async () => {
   await User.deleteMany({})
   const insUsers = await User.insertMany(users)
   console.log(insUsers)
-  return insUsers
 }
 
 seedDB().then(() => {
