@@ -78,7 +78,7 @@ const getAll = (req, res) => {
 }
 
 const getOne = (req, res) => {
-  User.findOne({_id: req.params.id}, (error, data) => {
+  User.findOne({ _id: req.params.id }, (error, data) => {
     if (error) {
       console.log(error)
       return res.json()

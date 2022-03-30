@@ -39,14 +39,14 @@ const createBooking = async (req, res) => {
     }
   })
   const allRooms = []
-  for (let room in roomsCategory.rooms) {
+  for (const room in roomsCategory.rooms) {
     allRooms.concat(roomsCategory.rooms[room])
   }
   console.log(allRooms)
   console.log(allRooms.length)
 
   RoomsCalendar.find({ date: req.body.date }, (error, data) => {
-    let roomCalendar;
+    let roomCalendar
     if (error) {
       console.log(error)
       return res.json()
@@ -64,7 +64,7 @@ const createBooking = async (req, res) => {
       }
       roomCalendar = new RoomsCalendar(roomsJson)
     }
-    if (!roomCalendar){
+    if (!roomCalendar) {
       roomCalendar = data
     }
     res.json(roomCalendar)

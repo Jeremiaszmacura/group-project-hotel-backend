@@ -48,7 +48,9 @@ services:
   #   build:
   #     context: .
   #     dockerfile: ./Dockerfile
-  #   command: npm run start
+  #   environment:
+  #     - DATABASE_HOST=mongodb
+  #   command: npm start
   #   ports:
   #     - 4000:4000
   #     - 9229:9229

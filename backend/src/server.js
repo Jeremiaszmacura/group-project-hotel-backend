@@ -44,20 +44,10 @@ app.use(function (err, req, res) {
   res.status(500).send('500 Server Error')
 })
 
-// if (require.main === module) {
-//     mongoose.connect(process.env.DATABASE_URL)  // eslint-disable-line
-//     .then(() => app.listen(port, () => {
-//       console.log(`[SERVER] listening on port ${port}...`) // after successful connection with database, sever start listening
-//       console.log(`[SERVER] URL: http://localhost:${port}`)
-//       console.log(`[SERVER] Database state: ${mongoose.connection.readyState}`)
-//     }))
-//     .catch((err) => console.log(err))
-// }
-
 // CONNECT TO DATABASE AND RUN SERVER
-// require('./config/mongooseLocalDB')
+require('./config/mongooseLocalDB')
 require('./config/passport')
-require('./config/mongooseAtlasDB')
+// require('./config/mongooseAtlasDB')
 
 mongoose.connection.on('open', function () {
   app.listen(port, function () {
