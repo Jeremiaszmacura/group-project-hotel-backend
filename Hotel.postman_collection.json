@@ -515,13 +515,95 @@
 			"name": "Restaurant",
 			"item": [
 				{
+					"name": "get restaurants",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/restaurant",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"restaurant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get menu by restaurant's id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/restaurant/:id/menu",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"restaurant",
+								":id",
+								"menu"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "62440da2d12d2e91da04ec99"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get dish by restaurant's and dish's ids",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/restaurant/:restaurantId/dish/:dishId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"restaurant",
+								":restaurantId",
+								"dish",
+								":dishId"
+							],
+							"variable": [
+								{
+									"key": "restaurantId",
+									"value": "62441128afd3f8e6e5f98718"
+								},
+								{
+									"key": "dishId",
+									"value": "624413d116c9cff3ed766eb0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "create restaurant",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYyNDMwMmU1Y2UzNGRmZDkxNmYyMzlmOCIsImVtYWlsIjoiZW1haWxAZW1haWwuY29tIn0sImlhdCI6MTY0ODYyNTc0M30.hhfroXtxvPWUt77wtbhHKb0tZWMDdrn0hpgpVRt7y7E",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"capacity\": 30\r\n}",
+							"raw": "{\r\n    \"name\": \"JKFD\",\r\n    \"capacity\": 30\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -535,6 +617,167 @@
 							],
 							"path": [
 								"restaurant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create dish",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYyNDMwMmU1Y2UzNGRmZDkxNmYyMzlmOCIsImVtYWlsIjoiZW1haWxAZW1haWwuY29tIn0sImlhdCI6MTY0ODYyNTc0M30.hhfroXtxvPWUt77wtbhHKb0tZWMDdrn0hpgpVRt7y7E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"potatoes\",\r\n    \"price\": 7,\r\n    \"description\": \"potatoes from Poland\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/restaurant/:id/dish",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"restaurant",
+								":id",
+								"dish"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "62441128afd3f8e6e5f98718"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update restaurant",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYyNDMwMmU1Y2UzNGRmZDkxNmYyMzlmOCIsImVtYWlsIjoiZW1haWxAZW1haWwuY29tIn0sImlhdCI6MTY0ODYyNTc0M30.hhfroXtxvPWUt77wtbhHKb0tZWMDdrn0hpgpVRt7y7E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"capacity\": 30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/restaurant/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"restaurant",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "62440da2d12d2e91da04ec99"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove restaurant",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYyNDMwMmU1Y2UzNGRmZDkxNmYyMzlmOCIsImVtYWlsIjoiZW1haWxAZW1haWwuY29tIn0sImlhdCI6MTY0ODYyNTc0M30.hhfroXtxvPWUt77wtbhHKb0tZWMDdrn0hpgpVRt7y7E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/restaurant/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"restaurant",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6244085efe7e6534a160e36f"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove dish by restaurant's and dish's ids",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYyNDMwMmU1Y2UzNGRmZDkxNmYyMzlmOCIsImVtYWlsIjoiZW1haWxAZW1haWwuY29tIn0sImlhdCI6MTY0ODYyNTc0M30.hhfroXtxvPWUt77wtbhHKb0tZWMDdrn0hpgpVRt7y7E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/restaurant/:restaurantId/dish/:dishId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"restaurant",
+								":restaurantId",
+								"dish",
+								":dishId"
+							],
+							"variable": [
+								{
+									"key": "restaurantId",
+									"value": "62441128afd3f8e6e5f98718"
+								},
+								{
+									"key": "dishId",
+									"value": "62441a016fe99980be5afd33"
+								}
 							]
 						}
 					},
