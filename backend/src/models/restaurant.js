@@ -6,7 +6,8 @@ const { DishSchema } = require('./dish')
 const RestaurantSchema = new Schema({
   name: {
     type: String,
-    required: 'Kindly enter the name for restaurant'
+    required: 'Kindly enter the name for restaurant',
+    unique: true
   },
   capacity: {
     type: Number,

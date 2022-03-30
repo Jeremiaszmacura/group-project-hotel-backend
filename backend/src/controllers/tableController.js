@@ -4,10 +4,10 @@ const getAll = (req, res) => {
   Table.find({}, (error, data) => {
     if (error) {
       console.log(error)
-      return res.json()
+      return res.json('something went wrong')
     }
     if (!data) {
-      return res.json({ error: 'No table in database' })
+      return res.json({ error: 'No tables in database' })
     }
     res.json(data)
   })
@@ -17,7 +17,7 @@ const getOne = (req, res) => {
   Table.findOne({ __id: req.params.id }, (error, data) => {
     if (error) {
       console.log(error)
-      return res.json()
+      return res.json('something went wrong')
     }
 
     if (!data) {

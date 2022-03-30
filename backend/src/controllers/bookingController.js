@@ -7,14 +7,13 @@ const getAll = (req, res) => {
 }
 
 const getUserAll = (req, res) => {
-  console.log(req.user)
   User.findOne({ _id: req.user._id }, (error, data) => {
     if (error) {
       console.log(error)
-      return res.json()
+      return res.json('something went wrong')
     }
     if (!data) {
-      return res.json({ error: 'No users in database' })
+      return res.json({ error: 'No user found' })
     }
     res.json(data.bookings)
   })
@@ -29,27 +28,17 @@ const getBookingsFilter = (req, res) => {
 }
 
 const createBooking = async (req, res) => {
-  const roomsCategory = await RoomsCategory.find({}, (error, data) => {
-    if (error) {
-      console.log(error)
-      return res.json()
-    }
-    if (!data) {
-      return res.json({ error: 'There are no categories in database' })
-    }
-  })
-  const allRooms = []
-  for (const room in roomsCategory.rooms) {
-    allRooms.concat(roomsCategory.rooms[room])
+  const roomsCategory = await RoomsCategory.find({})
+  let allRooms = []
+  for (const category in roomsCategory) {
+    allRooms = [...allRooms, ...roomsCategory[category].rooms]
   }
-  console.log(allRooms)
-  console.log(allRooms.length)
 
-  RoomsCalendar.find({ date: req.body.date }, (error, data) => {
+  RoomsCalendar.findOne({ date: req.body.date }, async (error, data) => {
     let roomCalendar
     if (error) {
       console.log(error)
-      return res.json()
+      return res.json('something went wrong')
     }
     if (!data) {
       const roomsJson = {
@@ -57,17 +46,16 @@ const createBooking = async (req, res) => {
         rooms: []
       }
       for (let i = 0; i < allRooms.length; i++) {
-        roomsJson.concat({
+        roomsJson.rooms = [...roomsJson.rooms, {
           room: allRooms[i]._id,
           user: null
-        })
+        }]
       }
       roomCalendar = new RoomsCalendar(roomsJson)
+      const _roomCalendar = new RoomsCalendar(roomCalendar)
+      data = await _roomCalendar.save()
     }
-    if (!roomCalendar) {
-      roomCalendar = data
-    }
-    res.json(roomCalendar)
+    return res.json(data)
   })
 }
 

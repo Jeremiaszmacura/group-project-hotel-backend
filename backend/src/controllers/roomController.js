@@ -1,31 +1,11 @@
 const { RoomsCategory } = require('../models/roomsCategory')
-const { Room } = require('../models/room')
 
 const getAll = (req, res) => {
-  Room.find({}, (error, data) => {
-    if (error) {
-      console.log(error)
-      return res.json()
-    }
-    if (!data) {
-      return res.json({ error: 'No room categories in database' })
-    }
-    res.json(data)
-  })
+  return res.json('getAll')
 }
 
 const getOne = (req, res) => {
-  Room.findOne({ __id: req.params.id }, (error, data) => {
-    if (error) {
-      console.log(error)
-      return res.json()
-    }
-
-    if (!data) {
-      return res.json({ error: 'No table in database' })
-    }
-    res.json(data)
-  })
+  return res.json('getOne')
 }
 
 const getRoomsFilter = (req, res) => {
@@ -35,8 +15,7 @@ const getRoomsFilter = (req, res) => {
 const getCategories = (req, res) => {
   RoomsCategory.find({}, (error, data) => {
     if (error) {
-      console.log(error)
-      return res.json()
+      return res.json(error)
     }
     if (!data) {
       return res.json({ error: 'No room categories in database' })
@@ -50,7 +29,7 @@ const createCategory = (req, res) => {
 
   roomCategory.save()
     .then((data) => {
-      res.json(`Account for email: ${data.email} has beed created. Welcome ${data.name}!`)
+      res.json(`Category: ${data.name} has been created.`)
     })
     .catch((error) => {
       console.log(error)
@@ -73,8 +52,8 @@ const createRoom = async (req, res) => {
   delete req.body.double
   req.body.beds = beds
   try {
-    const room = await RoomsCategory.findOneAndUpdate({ name: categoryName }, { $push: { rooms: req.body } }, { new: true, runValidators: true })
-    room ? res.json(room) : res.status(404).send()
+    const roomsCategory = await RoomsCategory.findOneAndUpdate({ name: categoryName }, { $push: { rooms: req.body } }, { new: true, runValidators: true })
+    roomsCategory ? res.json(roomsCategory) : res.status(404).send()
   } catch (err) {
     if (err.name === 'ValidationError') {
       res.status(422).send(err)

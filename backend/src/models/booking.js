@@ -55,8 +55,7 @@ BookingSchema.pre('save', function (callback) {
   day = day.replaceAll('/', '')
   day = day.slice(0, 4) + day.slice(6)
 
-  const generatedConfirmationNumber = [day, idGenerator()].join('-')
-  booking.confirmationNumber = generatedConfirmationNumber
+  booking.confirmationNumber = [day, idGenerator()].join('-')
   console.log('###################################')
   console.log(booking.confirmationNumber)
   console.log(typeof (booking.confirmationNumber))
@@ -64,9 +63,6 @@ BookingSchema.pre('save', function (callback) {
   callback()
 })
 
-const Booking = mongoose.model('Booking', BookingSchema)
-
 module.exports = {
-  Booking,
   BookingSchema
 }

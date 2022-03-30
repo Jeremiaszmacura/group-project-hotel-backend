@@ -17,9 +17,6 @@ const ReservationSchema = new Schema({
   }]
 }, { timestamps: true })
 
-const Reservation = mongoose.model('Reservation', ReservationSchema)
-
 module.exports = {
-  Reservation,
   ReservationSchema
 }
