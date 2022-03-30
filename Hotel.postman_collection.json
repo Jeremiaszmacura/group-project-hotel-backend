@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "03cebe88-781c-4551-817a-854bc5599ee4",
+		"_postman_id": "1eea1aaf-7bd2-4906-bb27-cad0f541b036",
 		"name": "Hotel",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -419,11 +419,21 @@
 				{
 					"name": "create comment",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYyNDMwMmU1Y2UzNGRmZDkxNmYyMzlmOCIsImVtYWlsIjoiZW1haWxAZW1haWwuY29tIn0sImlhdCI6MTY0ODYyNTc0M30.hhfroXtxvPWUt77wtbhHKb0tZWMDdrn0hpgpVRt7y7E",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \r\n}",
+							"raw": "{\r\n    \"text\": \"Super!\",\r\n    \"stars\": 5\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -449,7 +459,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \r\n}",
+							"raw": "{\r\n    \"stars\": 5\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -468,7 +478,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "6239ac4b20b08f801dadb27a"
+									"value": "62440a4c33849e8d30ef2c9a"
 								}
 							]
 						}
@@ -492,7 +502,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "6239ac4b20b08f801dadb27a"
+									"value": "6244085efe7e6534a160e36f"
 								}
 							]
 						}
