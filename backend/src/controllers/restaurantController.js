@@ -95,7 +95,33 @@ const updateRestaurant = (req, res) => {
 }
 
 const updateDish = (req, res) => {
-  return res.json('updateDish')
+  Restaurant.findOne({ _id: req.params.restaurantId }, (error, data) => {
+    if (error) {
+      console.log(error)
+      return res.json('something went wrong')
+    }
+    if (!data) {
+      return res.json('No restaurant in database')
+    }
+    const pos = data.menu.map(function (e) {
+      return e._id.toString()
+    }).indexOf(req.params.dishId)
+    if (pos !== -1) {
+      for (const field in req.body) {
+        data.menu[pos][field] = req.body[field]
+      }
+      data.save()
+        .then(() => {
+          return res.json('Dish updated')
+        })
+        .catch((error) => {
+          console.log(error)
+          return res.json('something went wrong')
+        })
+    } else {
+      return res.json('No dish in menu')
+    }
+  })
 }
 
 const removeDish = (req, res) => {

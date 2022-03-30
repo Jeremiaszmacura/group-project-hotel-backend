@@ -710,6 +710,55 @@
 					"response": []
 				},
 				{
+					"name": "update dish",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYyNDMwMmU1Y2UzNGRmZDkxNmYyMzlmOCIsImVtYWlsIjoiZW1haWxAZW1haWwuY29tIn0sImlhdCI6MTY0ODYyNTc0M30.hhfroXtxvPWUt77wtbhHKb0tZWMDdrn0hpgpVRt7y7E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"price\": 8\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/restaurant/:restaurantId/dish/:dishId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"restaurant",
+								":restaurantId",
+								"dish",
+								":dishId"
+							],
+							"variable": [
+								{
+									"key": "restaurantId",
+									"value": "62441128afd3f8e6e5f98718"
+								},
+								{
+									"key": "dishId",
+									"value": "62441a0c6fe99980be5afd3b"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "remove restaurant",
 					"request": {
 						"auth": {
