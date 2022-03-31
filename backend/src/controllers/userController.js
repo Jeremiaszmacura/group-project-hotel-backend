@@ -90,12 +90,31 @@ const getOne = (req, res) => {
   })
 }
 
-const updateUser = (req, res) => {
-  return res.json('updateUser')
+const updateUser = async (req, res) => {
+  try {
+    const data = await User.findByIdAndUpdate({ _id: req.params.id }, req.body, { new: true, runValidators: true })
+    data ? res.json(data) : res.status(404).send()
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(422).send(err)
+    } else {
+      res.status(500).send(err)
+    }
+  }
 }
 
 const removeUser = (req, res) => {
-  return res.json('removeUser')
+  User.findOne({ _id: req.params.id }, (error, data) => {
+    if (error) {
+      console.log(error)
+      return res.json('something went wrong')
+    }
+    if (!data) {
+      return res.json('No user in database')
+    }
+    data.remove()
+    return res.json('User deleted')
+  })
 }
 
 module.exports = {
