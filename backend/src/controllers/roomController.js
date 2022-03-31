@@ -1,11 +1,30 @@
 const { RoomsCategory } = require('../models/roomsCategory')
+const { RoomSchema } = require('../models/room')
 
 const getAll = (req, res) => {
-  return res.json('getAll')
+  RoomsCategory.find({}, (error, data) => {
+    if (error) {
+      console.log(error)
+      return res.json('something went wrong')
+    }
+    if (!data.length) {
+      return res.json('No rooms in database')
+    }
+    return res.json(data)
+  })
 }
 
 const getOne = (req, res) => {
-  return res.json('getOne')
+  RoomsCategory.findById(req.params.id, (error, data) => {
+    if (error) {
+      console.log(error)
+      return res.json('something went wrong')
+    }
+    if (!data) {
+      return res.json('No room in database')
+    }
+    return res.json(data)
+  })
 }
 
 const getRoomsFilter = (req, res) => {
@@ -63,12 +82,30 @@ const createRoom = async (req, res) => {
   }
 }
 
-const updateCategory = (req, res) => {
-  return res.json('updateCategory')
+const updateCategory = async (req, res) => {
+  try {
+    const data = await RoomsCategory.findByIdAndUpdate({ _id: req.params.id }, req.body, { new: true, runValidators: true })
+    data ? res.json(data) : res.status(404).send()
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(422).send(err)
+    } else {
+      res.status(500).send(err)
+    }
+  }
 }
 
-const updateRoom = (req, res) => {
-  return res.json('updateRoom')
+const updateRoom = async (req, res) => {
+  try {
+    const data = await RoomSchema.findByIdAndUpdate({ _id: req.params.id }, req.body, { new: true, runValidators: true })
+    data ? res.json(data) : res.status(404).send()
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(422).send(err)
+    } else {
+      res.status(500).send(err)
+    }
+  }
 }
 
 const removeCategory = (req, res) => {
