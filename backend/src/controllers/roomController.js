@@ -109,7 +109,17 @@ const updateRoom = async (req, res) => {
 }
 
 const removeCategory = (req, res) => {
-  return res.json('removeCategory')
+  RoomsCategory.findOne({ _id: req.params.id }, (error, data) => {
+    if (error) {
+      console.log(error)
+      return res.json('something went wrong')
+    }
+    if (!data) {
+      return res.json('No category in database')
+    }
+    data.remove()
+    return res.json('Category deleted')
+  })
 }
 
 module.exports = {
