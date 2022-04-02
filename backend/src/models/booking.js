@@ -48,17 +48,12 @@ const BookingSchema = new Schema({
 }, { timestamps: true })
 
 BookingSchema.pre('save', function (callback) {
-  console.log('###################################')
-  console.log('###################################')
   const booking = this
   let day = moment().format('L')
   day = day.replaceAll('/', '')
   day = day.slice(0, 4) + day.slice(6)
 
   booking.confirmationNumber = [day, idGenerator()].join('-')
-  console.log('###################################')
-  console.log(booking.confirmationNumber)
-  console.log(typeof (booking.confirmationNumber))
 
   callback()
 })

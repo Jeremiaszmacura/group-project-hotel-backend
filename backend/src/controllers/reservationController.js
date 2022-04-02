@@ -1,5 +1,17 @@
+const { User } = require('../models/user')
+
 const getAll = (req, res) => {
-  return res.json('getAll')
+  User.find({}, (error, data) => {
+    if (error) {
+      console.log(error)
+      return res.status(500).json('something went wrong')
+    }
+    let allReservations = []
+    for (const i in data) {
+      allReservations = [...allReservations, ...data[i].reservations]
+    }
+    return res.status(200).json(allReservations)
+  })
 }
 
 const getOne = (req, res) => {

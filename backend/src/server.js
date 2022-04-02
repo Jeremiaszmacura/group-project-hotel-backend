@@ -31,11 +31,11 @@ app.get('/', (req, res) => {
 })
 app.use('/users', userRoutes)
 app.use('/bookings', bookingRoutes)
-app.use('/rooms', roomRoutes)
+app.use('/categories', roomRoutes)
 app.use('/comments', commentRoutes)
 app.use('/restaurant', restaurantRoutes)
 app.use('/tables', tableRoutes)
-app.use('/reservation', reservationRoutes)
+app.use('/reservations', reservationRoutes)
 app.use((req, res) => {
   res.status(404).send('404 Error')
 })
@@ -45,9 +45,9 @@ app.use(function (err, req, res) {
 })
 
 // CONNECT TO DATABASE AND RUN SERVER
-require('./config/mongooseLocalDB')
+// require('./config/mongooseLocalDB')
 require('./config/passport')
-// require('./config/mongooseAtlasDB')
+require('./config/mongooseAtlasDB')
 
 mongoose.connection.on('open', function () {
   app.listen(port, function () {

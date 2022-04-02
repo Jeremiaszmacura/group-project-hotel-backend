@@ -8,7 +8,7 @@ const getAll = (req, res) => {
       return res.json('something went wrong')
     }
     if (!data.length) {
-      return res.json('No rooms in database')
+      return res.json('No room categories in database')
     }
     return res.json(data)
   })
@@ -28,10 +28,21 @@ const getOne = (req, res) => {
 }
 
 const getRoomsFilter = (req, res) => {
-  return res.json('getRoomsFilter')
+  RoomsCategory.find({}, (error, data) => {
+    if (error) {
+      console.log(error)
+      return res.status(500).json('something went wrong')
+    }
+    let allFilteredRooms = []
+    for (const i in data) {
+      const filteredRooms = data[i].rooms.filter(room => room.price >= req.query.priceFrom && room.price <= req.query.priceTo)
+      allFilteredRooms = [...allFilteredRooms, ...filteredRooms]
+    }
+    return res.json(allFilteredRooms)
+  })
 }
 
-const getCategories = (req, res) => {
+const getRooms = (req, res) => {
   RoomsCategory.find({}, (error, data) => {
     if (error) {
       return res.json(error)
@@ -39,7 +50,11 @@ const getCategories = (req, res) => {
     if (!data) {
       return res.json({ error: 'No room categories in database' })
     }
-    res.json(data)
+    let allRooms = []
+    for (const i in data) {
+      allRooms = [...allRooms, ...data[i].rooms]
+    }
+    res.json(allRooms)
   })
 }
 
@@ -122,11 +137,33 @@ const removeCategory = (req, res) => {
   })
 }
 
+const getOneRoom = (req, res) => {
+  RoomsCategory.find({}, (error, data) => {
+    if (error) {
+      console.log(error)
+      return res.status(500).json('something went wrong')
+    }
+    if (!data) {
+      return res.json('No rooms categories in database')
+    }
+    let room = null
+    for (const i in data) {
+      room = data[i].rooms.find(element => element.id.toString() === req.params.id.toString())
+      if (room) break
+    }
+    if (!room) {
+      return res.json('No room in database')
+    }
+    return res.json(room)
+  })
+}
+
 module.exports = {
   getAll,
   getOne,
+  getOneRoom,
   getRoomsFilter,
-  getCategories,
+  getRooms,
   createCategory,
   createRoom,
   updateCategory,
