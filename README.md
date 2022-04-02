@@ -21,17 +21,17 @@
 # API:
 | Users                | Booking                           | Category                       | Comment                |
 |----------------------|-----------------------------------|--------------------------------|------------------------|
-| `GET` /users         | `GET` /bookings                   | `GET` /category/rooms          | `GET` /comments        |
-| `GET` /users/:id     | `GET` /bookings/:id               | `GET` /category/rooms/:id      | `POST` /comments       |
-| `POST` /users/signup | `GET` /bookings/user              | `GET` /category/rooms/params   | `PUT` /comments/:id    |
-| `PUT` /users/:id     | `GET` /bookings/search/parameters | `GET` /category                | `DELETE` /comments/:id |
-| `DELETE` /users/:id  | `POST` /bookings                  | `POST` /category               |
-|                      | `PUT` /bookings/:id               | `POST` /category/rooms         |
-|                      | `DELETE` /bookings/:id            | `PUT` /category/rooms/:id      |
-|                      |                                   | `PATCH` /category/:id          |
-|                      |                                   | `DELETE` /category/:id         |
-                                                           | `DELETE` /category/room/:id    |
-                                                           | `GET` /category/:id            |
+| `GET` /users         | `GET` /bookings                   | `GET` /categories/rooms          | `GET` /comments        |
+| `GET` /users/:id     | `GET` /bookings/:id               | `GET` /categories/rooms/:id      | `POST` /comments       |
+| `POST` /users/signup | `GET` /bookings/user              | `GET` /categories/rooms/params   | `PUT` /comments/:id    |
+| `PUT` /users/:id     | `GET` /bookings/search/parameters | `GET` /categories                | `DELETE` /comments/:id |
+| `DELETE` /users/:id  | `POST` /bookings                  | `POST` /categories               |
+|                      | `PUT` /bookings/:id               | `POST` /categories/rooms         |
+|                      | `DELETE` /bookings/:id            | `PUT` /categories/rooms/:id      |
+|                      |                                   | `PATCH` /categories/:id          |
+|                      |                                   | `DELETE` /categories/:id         |
+                                                           | `DELETE` /categories/room/:id    |
+                                                           | `GET` /categories/:id            |
 
 
 | Restaurant                        | Table                           | Reservation                          |

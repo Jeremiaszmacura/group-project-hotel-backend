@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1eea1aaf-7bd2-4906-bb27-cad0f541b036",
+		"_postman_id": "896d5b15-a957-47e1-9d2b-e71f7f378b89",
 		"name": "Hotel",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -260,7 +260,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"date\": \"2020-01-03\"\r\n}",
+							"raw": "{\r\n    \"dates\": [\"2020-01-10\", \"2020-01-15\"],\r\n    \"roomsIds\": [\"62430324ce34dfd916f23a06\", \"62430330ce34dfd916f23a09\"],\r\n    \"comment\": \"Where are curly braces in python?????!\",\r\n    \"numberOfPeople\": 4,\r\n    \"guestNames\": [\"Alice\", \"John\"]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -356,13 +356,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/rooms/category",
+							"raw": "{{baseUrl}}/categores",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"rooms",
-								"category"
+								"categores"
 							]
 						}
 					},
@@ -383,12 +382,59 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/rooms",
+							"raw": "{{baseUrl}}/categories/rooms",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
+								"categories",
 								"rooms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get rooms filtered",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/categories/rooms/params?priceFrom=100&priceTo=160",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"categories",
+								"rooms",
+								"params"
+							],
+							"query": [
+								{
+									"key": "priceFrom",
+									"value": "100"
+								},
+								{
+									"key": "priceTo",
+									"value": "160"
+								}
 							]
 						}
 					},
@@ -840,7 +886,16 @@
 		},
 		{
 			"name": "Reservation",
-			"item": []
+			"item": [
+				{
+					"name": "localhost",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"variable": [
