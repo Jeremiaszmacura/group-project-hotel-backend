@@ -27,6 +27,8 @@ const RoomSchema = new Schema({
   }
 })
 
+RoomSchema.index({ price: 1, additionalFeatures: 1 }) // ascending
+
 module.exports = {
   RoomSchema
 }

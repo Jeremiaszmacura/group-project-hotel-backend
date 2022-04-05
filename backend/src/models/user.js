@@ -70,6 +70,8 @@ UserSchema.methods.verifyPassword = async function (password) {
   return await bcrypt.compare(password, this.password)
 }
 
+UserSchema.index({ email: 1, role: 1 }) // ascending
+
 const User = mongoose.model('User', UserSchema)
 
 module.exports = { User }

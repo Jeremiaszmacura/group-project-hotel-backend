@@ -58,6 +58,8 @@ BookingSchema.pre('save', function (callback) {
   callback()
 })
 
+BookingSchema.index({ startsAt: -1, endsAt: -1 }) // descending
+
 module.exports = {
   BookingSchema
 }
