@@ -49,12 +49,19 @@
 ## Catalog structure:
 
 <pre>
+|___.github
 |___.gitignore
 |___README.md
+|___Hotel.postman_collection.json
 |___frontend
 |___backend___
               |___README.md
               |___.eslintrc.json
+              |___.env
+              |___.dockerignore
+              |___Dockerfile
+              |___docker-compose.yml
+              |___mongo-init.js
               |___package-lock.json
               |___package.json
               |___src___
@@ -63,6 +70,8 @@
                         |___models -> database models
                         |___routes -> application routes (urls)
                         |___controllers -> all business logic
+                        |___config -> database and passport.js configurations
+                        |___seeder -> data and logic to seed database
                         |_____tests__ -> unit tests, integration Tests, ...
 </pre>
 <hr>
@@ -72,7 +81,3 @@
 * #### Reservation: startsAt, endsAt
 * #### Rooms: features, price
 * #### Users: email, role
-
-# Developing rules:
-<!-- UL-->
-* ### branch namespace: feature or fix + "/" + the first part of issue title, for example: feature/backend-04, fix/backend-11, feature/documentation-02, ...
