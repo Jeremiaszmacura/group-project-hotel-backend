@@ -1,6 +1,7 @@
 const async = require('async')
 const mongoose = require('mongoose')
 const { dataWareHouse } = require('../models/dataWareHouseController')
+const { User } = require('../models/user')
 
 const listIndicators = async (req, res) => {
   try {
@@ -68,13 +69,25 @@ const setRebuildPeriod = (req, res) => {
 //   }, null, true, 'Europe/Madrid')
 // }
 
-// const computeTopCustomers = () => {
-//     callback(err, res[0].top)
+// const computeTopCustomers = async () => {
+//   User.aggregate([
+//     { $unwind: '$bookings' },
+//     {
+//       $group: {
+//         spentMoney: { $sum: '$bookings.price' }
+//       }
+//     },
+//     { $project: { topCustomers: { }}}
+//   ], (err, res) => {
+//     callback(err, res[0].TopCustomers)
+//   })
+//   await dataWareHouse.save()
 // }
 
 module.exports = {
   listIndicators,
   lastIndicator,
-  setRebuildPeriod,
-  createDataWareHouseJob
+  setRebuildPeriod
+  // createDataWareHouseJob,
+  // computeTopCustomers
 }
