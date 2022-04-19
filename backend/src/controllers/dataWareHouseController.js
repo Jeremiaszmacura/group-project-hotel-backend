@@ -1,11 +1,11 @@
 const async = require('async')
 const mongoose = require('mongoose')
-const { dataWareHouse } = require('../models/dataWareHouseController')
+const { DataWareHouse } = require('../models/dataWareHouseModel')
 const { User } = require('../models/user')
 
 const listIndicators = async (req, res) => {
   try {
-    const indicators = await dataWareHouse.find().sort('-computationMoment')
+    const indicators = await DataWareHouse.find().sort('-computationMoment')
     res.json(indicators)
   } catch (err) {
     res.status(500).send(err)
@@ -14,7 +14,7 @@ const listIndicators = async (req, res) => {
 
 const lastIndicator = async (req, res) => {
   try {
-    const lastIndicators = await dataWareHouse.find().sort('-computationMoment').limit(1)
+    const lastIndicators = await DataWareHouse.find().sort('-computationMoment').limit(1)
     res.json(lastIndicators)
   } catch (err) {
     res.status(500).send(err)
@@ -28,7 +28,7 @@ const CronTime = require('cron').CronTime
 // '*/30 * * * * *' every 30 seconds
 // '*/10 * * * * *' every 10 seconds
 // '* * * * * *' every second
-let rebuildPeriod = '*/30 * * * * *' // By default, every 30 sgs
+let rebuildPeriod = '*/10 * * * * *' // By default, every 30 sgs
 let computeDataWareHouseJob
 
 const setRebuildPeriod = (req, res) => {
@@ -40,54 +40,51 @@ const setRebuildPeriod = (req, res) => {
   res.json(req.body.rebuildPeriod)
 }
 
-// const createDataWareHouseJob = () => {
-//   computeDataWareHouseJob = new CronJob(rebuildPeriod, async function () {
-//     const newDataWareHouse = new DataWareHouseModel()
-//     console.log('Cron job submitted. Rebuild period: ' + rebuildPeriod)
-//     try {
-//       const results = await async.parallel([
-//         computeTopCancellers,
-//         computeTopNotCancellers,
-//         computeBottomNotCancellers,
-//         computeTopClerks,
-//         computeBottomClerks,
-//         computeRatioCancelledOrders
-//       ])
-//       newDataWareHouse.topCancellers = results[0]
-//       newDataWareHouse.topNotCancellers = results[1]
-//       newDataWareHouse.bottomNotCancellers = results[2]
-//       newDataWareHouse.topClerks = results[3]
-//       newDataWareHouse.bottomClerks = results[4]
-//       newDataWareHouse.ratioCancelledOrders = results[5]
-//       newDataWareHouse.rebuildPeriod = rebuildPeriod
+const createDataWareHouseJob = () => {
+  computeDataWareHouseJob = new CronJob(rebuildPeriod, async function () {
+    const newDataWareHouse = new DataWareHouse()
+    console.log('Cron job submitted. Rebuild period: ' + rebuildPeriod)
+    try {
+      const results = await async.parallel([
+        computeTopCustomers
+      ])
+      newDataWareHouse.topCustomers = results[0]
+      newDataWareHouse.rebuildPeriod = rebuildPeriod
 
-//       await newDataWareHouse.save()
-//       console.log('new DataWareHouse succesfully saved. Date: ' + new Date())
-//     } catch (err) {
-//       console.log('Error computing datawarehouse: ' + err)
-//     }
-//   }, null, true, 'Europe/Madrid')
-// }
+      console.log('################3')
+      await newDataWareHouse.save()
+      console.log('################4')
+      console.log('new DataWareHouse succesfully saved. Date: ' + new Date())
+    } catch (err) {
+      console.log('Error computing DataWareHouse: ' + err)
+    }
+  }, null, true, 'Europe/Madrid')
+}
 
-// const computeTopCustomers = async () => {
-//   User.aggregate([
-//     { $unwind: '$bookings' },
-//     {
-//       $group: {
-//         spentMoney: { $sum: '$bookings.price' }
-//       }
-//     },
-//     { $project: { topCustomers: { }}}
-//   ], (err, res) => {
-//     callback(err, res[0].TopCustomers)
-//   })
-//   await dataWareHouse.save()
-// }
+const computeTopCustomers = (callback) => {
+  console.log('################1')
+  User.aggregate([
+    { $unwind: '$bookings' },
+    {
+      $group: {
+        _id: '$_id', total: { $sum: '$bookings.price' }
+      }
+    },
+    {
+      $sort: { total: -1 }
+    },
+    {
+      $limit: 2
+    }
+  ], function (err, res) {
+    callback(err, res._id)
+  })
+}
 
 module.exports = {
   listIndicators,
   lastIndicator,
-  setRebuildPeriod
-  // createDataWareHouseJob,
-  // computeTopCustomers
+  setRebuildPeriod,
+  createDataWareHouseJob,
+  computeTopCustomers
 }

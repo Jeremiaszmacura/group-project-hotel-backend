@@ -59,4 +59,8 @@ mongoose.connection.on('error', function (err) {
   console.error('DB connection error ' + err)
 })
 
+// DataWareHouse
+const DataWareHouseTools = require('./controllers/dataWareHouseController')
+DataWareHouseTools.createDataWareHouseJob()
+
 module.exports = app

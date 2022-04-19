@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "896d5b15-a957-47e1-9d2b-e71f7f378b89",
+		"_postman_id": "48a57785-4ab0-47df-a102-eb7b2f2cc365",
 		"name": "Hotel",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -42,7 +42,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "6239ac4b20b08f801dadb27a"
+									"value": "624302e5ce34dfd916f239f8"
 								}
 							]
 						}
@@ -56,7 +56,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"John\",\r\n    \"surname\": \"Kowalsky\",\r\n    \"phoneNumber\": \"123123123\",\r\n    \"address\": \"main street\",\r\n    \"email\": \"email@email.com\",\r\n    \"password\": \"12345678\",\r\n    \"role\": \"ADMIN\"\r\n}",
+							"raw": "{\r\n    \"name\": \"John\",\r\n    \"surname\": \"Kowalsky\",\r\n    \"phoneNumber\": \"123123123\",\r\n    \"address\": \"main street\",\r\n    \"email\": \"email4@email.com\",\r\n    \"password\": \"12345678\",\r\n    \"role\": \"ADMIN\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -110,7 +110,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \r\n}",
+							"raw": "{\r\n    \"name\": \"John2\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -129,7 +129,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "6239ac4b20b08f801dadb27a"
+									"value": "624302e5ce34dfd916f239f8"
 								}
 							]
 						}
@@ -162,7 +162,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "6239ac4b20b08f801dadb27a"
+									"value": "625eace951e95e9a972bfcfe"
 								}
 							]
 						}
@@ -199,7 +199,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYyNDMwMmU1Y2UzNGRmZDkxNmYyMzlmOCIsImVtYWlsIjoiZW1haWxAZW1haWwuY29tIn0sImlhdCI6MTY0ODU1ODg0Nn0.rAlSREQT3UrXBZ_DL1k4lrOBfC1jp1vM5w9M0YEPzlE",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYyNDMwMmU1Y2UzNGRmZDkxNmYyMzlmOCIsImVtYWlsIjoiZW1haWxAZW1haWwuY29tIn0sImlhdCI6MTY1MDM3MTk1MH0.xRMlQbnDe3fPG17Yd7pMdYwa57qCJCmf8GyOlbe5o4Q",
 									"type": "string"
 								}
 							]
@@ -236,7 +236,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "1"
+									"value": "6248946e7330d0a004006efe"
 								}
 							]
 						}
@@ -260,7 +260,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"dates\": [\"2020-01-10\", \"2020-01-15\"],\r\n    \"roomsIds\": [\"62430324ce34dfd916f23a06\", \"62430330ce34dfd916f23a09\"],\r\n    \"comment\": \"Where are curly braces in python?????!\",\r\n    \"numberOfPeople\": 4,\r\n    \"guestNames\": [\"Alice\", \"John\"]\r\n}",
+							"raw": "{\r\n    \"startsAt\": \"2022-03-10\",\r\n    \"endsAt\": \"2022-03-13\",\r\n    \"roomsIds\": [\"62430324ce34dfd916f23a06\", \"62430330ce34dfd916f23a09\"],\r\n    \"comment\": \"Where are curly braces in python?????!\",\r\n    \"numberOfPeople\": 4,\r\n    \"guestNames\": [\"Alice\", \"John\"]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -286,7 +286,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \r\n}",
+							"raw": "{\r\n    \"numberOfPeople\": 2\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -305,7 +305,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "\"6242e2f1f5aea4f477aecb91\""
+									"value": "625eae22512eb44b3b5e709c"
 								}
 							]
 						}
@@ -315,6 +315,16 @@
 				{
 					"name": "remove booking",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYyNDMwMmU1Y2UzNGRmZDkxNmYyMzlmOCIsImVtYWlsIjoiZW1haWxAZW1haWwuY29tIn0sImlhdCI6MTY1MDM3MTk1MH0.xRMlQbnDe3fPG17Yd7pMdYwa57qCJCmf8GyOlbe5o4Q",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -329,7 +339,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "6239ac4b20b08f801dadb27a"
+									"value": "625eae22512eb44b3b5e709c"
 								}
 							]
 						}
@@ -891,7 +901,10 @@
 					"name": "localhost",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": ""
+						}
 					},
 					"response": []
 				}

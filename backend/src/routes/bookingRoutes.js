@@ -7,9 +7,8 @@ const router = express.Router()
 router.get('/', bookingController.getAll)
 router.post('/', isLoggedIn, bookingController.createBooking)
 router.get('/user/', isLoggedIn, bookingController.getUserAll)
-router.get('/search/', bookingController.getBookingsFilter)
 router.get('/:id', bookingController.getOne)
-router.put('/:id', bookingController.updateBooking)
-router.delete('/:id', bookingController.removeBooking)
+router.put('/:id', isLoggedIn, bookingController.updateBooking)
+router.delete('/:id', isLoggedIn, bookingController.removeBooking)
 
 module.exports = router

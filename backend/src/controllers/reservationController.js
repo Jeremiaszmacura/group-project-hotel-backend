@@ -25,7 +25,7 @@ const getOne = (req, res) => {
     }
     let reservation = null
     for (const i in data) {
-      reservation = data[i].rooms.find(element => element.id.toString() === req.params.id.toString())
+      reservation = data[i].reservations.find(element => element.id.toString() === req.params.id.toString())
       if (reservation) break
     }
     if (!reservation) {
@@ -36,10 +36,29 @@ const getOne = (req, res) => {
 }
 
 const getReservationsFilter = (req, res) => {
-  return res.json('getReservationsFilter')
+  User.find({}, (error, data) => {
+    if (error) {
+      console.log(error)
+      return res.status(500).json('something went wrong')
+    }
+    if (!data) {
+      return res.json('No user in database')
+    }
+    let allFilteredReservations = []
+    for (const i in data) {
+      const filteredReservations = data[i].rooms
+        .filter(reservation =>
+          (reservation.startsAt >= req.query.startDay && reservation.startsAt <= req.query.endDay) ||
+            (reservation.endsAt >= req.query.startDay && reservation.endsAt <= req.query.endDay))
+      allFilteredReservations = [...allFilteredReservations, ...filteredReservations]
+    }
+    return res.json(allFilteredReservations)
+  })
 }
 
 const createReservation = (req, res) => {
+  req.body.dates.array.forEach(date => {
+  })
   return res.json('createReservation')
 }
 

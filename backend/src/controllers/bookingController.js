@@ -1,6 +1,7 @@
 const { User } = require('../models/user')
 const { RoomsCalendar } = require('../models/roomsCalendar')
 const { RoomsCategory } = require('../models/roomsCategory')
+const oneDay = 60 * 60 * 24 * 1000
 
 const getAll = (req, res) => {
   User.find({}, (error, data) => {
@@ -50,14 +51,12 @@ const getOne = (req, res) => {
   })
 }
 
-const getBookingsFilter = (req, res) => {
-  return res.json('getBookingsFilter')
-}
-
 const createBooking = async (req, res) => {
-  for (let i = 0; i < req.body.dates.length; i++) {
+  const dateFrom = new Date(req.body.startsAt)
+  const dateTo = new Date(req.body.endsAt)
+  for (let i = 0; i <= (dateTo - dateFrom) / oneDay; i++) {
     for (let j = 0; j < req.body.roomsIds.length; j++) {
-      const checkAvailability = await checkAvailabilityOfRoom(res, req.body.roomsIds[j], req.body.dates[i])
+      const checkAvailability = await checkAvailabilityOfRoom(res, req.body.roomsIds[j], new Date(dateFrom.getTime() + i * oneDay))
       if (checkAvailability === false) {
         return res.json('Unavailable - already reserved')
       }
@@ -76,8 +75,9 @@ const createBooking = async (req, res) => {
     }).indexOf(req.body.roomsIds[i])
     price += allRooms[pos].price
   }
-  for (let i = 0; i < req.body.dates.length; i++) {
-    RoomsCalendar.findOne({ date: req.body.dates[i] }, async (error, data) => {
+  price *= (dateTo - dateFrom) / oneDay
+  for (let i = 0; i <= (dateTo - dateFrom) / oneDay; i++) {
+    RoomsCalendar.findOne({ date: new Date(dateFrom.getTime() + i * oneDay) }, async (error, data) => {
       if (error) {
         console.log(error)
         return res.json('something went wrong')
@@ -92,8 +92,8 @@ const createBooking = async (req, res) => {
     })
   }
   const booking = {
-    startsAt: req.body.dates[0],
-    endsAt: req.body.dates[req.body.dates.length - 1],
+    startsAt: req.body.startsAt,
+    endsAt: req.body.endsAt,
     price: price,
     comment: req.body.comment,
     numberOfPeople: req.body.numberOfPeople,
@@ -117,11 +117,63 @@ const createBooking = async (req, res) => {
 }
 
 const updateBooking = (req, res) => {
-  return res.json('updateBooking')
+  User.findOne({ _id: req.user._id }, (error, data) => {
+    if (error) {
+      console.log(error)
+      return res.status(500).json('something went wrong')
+    }
+    if (!data) {
+      return res.status(404).json({ error: 'No user found' })
+    }
+    const pos = data.bookings.map(function (e) {
+      return e._id.toString()
+    }).indexOf(req.params.id)
+    if (pos !== -1) {
+      // TODO przy zmianie daty sprawdź czy możliwe z roomCalendar + zmień tam
+      for (const field in req.body) {
+        data.bookings[pos][field] = req.body[field]
+      }
+      data.save()
+        .then(() => {
+          return res.status(200).json('Booking updated')
+        })
+        .catch((error) => {
+          console.log(error)
+          return res.status(500).json('something went wrong')
+        })
+    } else {
+      return res.status(200).json('No booking')
+    }
+  })
 }
 
 const removeBooking = (req, res) => {
-  return res.json('removeBooking')
+  User.findOne({ _id: req.user._id }, (error, data) => {
+    if (error) {
+      console.log(error)
+      return res.status(500).json('something went wrong')
+    }
+    if (!data) {
+      return res.status(404).json({ error: 'No user found' })
+    }
+    const pos = data.bookings.map(function (e) {
+      return e._id.toString()
+    }).indexOf(req.params.id)
+    if (pos !== -1) {
+      // TODO usuń z roomCalendar (zmień ID na null)
+      data.bookings.splice(pos, 1)
+      data.save()
+        .then(() => {
+          return res.status(200).json('Booking removed')
+        })
+        .catch((error) => {
+          console.log(error)
+          return res.status(500).json('something went wrong')
+        })
+    } else {
+      return res.status(404).json('No booking')
+    }
+  })
 }
 
 const checkAvailabilityOfRoom = async (res, roomId, date) => {
@@ -171,7 +223,6 @@ module.exports = {
   getAll,
   getUserAll,
   getOne,
-  getBookingsFilter,
   createBooking,
   updateBooking,
   removeBooking
