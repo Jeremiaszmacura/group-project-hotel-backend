@@ -1,8 +1,6 @@
 const async = require('async')
-const mongoose = require('mongoose')
 const { DataWareHouse } = require('../models/dataWareHouseModel')
 const { User } = require('../models/user')
-const { BookingSchema } = require('../models/booking')
 
 const listIndicators = async (req, res) => {
   try {
