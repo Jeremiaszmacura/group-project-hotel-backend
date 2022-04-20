@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "48a57785-4ab0-47df-a102-eb7b2f2cc365",
+		"_postman_id": "f4ff1cd1-a7c4-4395-a5d1-e339c0818032",
 		"name": "Hotel",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -349,8 +349,25 @@
 			]
 		},
 		{
-			"name": "Room",
+			"name": "Category",
 			"item": [
+				{
+					"name": "all categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "create roomCategory",
 					"request": {
@@ -399,23 +416,6 @@
 							"path": [
 								"categories",
 								"rooms"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "all categories",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/categories",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"categories"
 							]
 						}
 					},
@@ -892,7 +892,58 @@
 		},
 		{
 			"name": "Table",
-			"item": []
+			"item": [
+				{
+					"name": "get seats filtered",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/tables/params?seats=5",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tables",
+								"params"
+							],
+							"query": [
+								{
+									"key": "seats",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create table",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"seats\": 7\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tables",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tables"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Reservation",
