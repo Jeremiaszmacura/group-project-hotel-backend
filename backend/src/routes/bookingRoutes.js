@@ -8,7 +8,6 @@ router.get('/', bookingController.getAll)
 router.post('/', isLoggedIn, bookingController.createBooking)
 router.get('/user/', isLoggedIn, bookingController.getUserAll)
 router.get('/:id', bookingController.getOne)
-router.put('/:id', isLoggedIn, bookingController.updateBooking)
 router.delete('/:id', isLoggedIn, bookingController.removeBooking)
 
 module.exports = router

@@ -2,6 +2,7 @@ const async = require('async')
 const mongoose = require('mongoose')
 const { DataWareHouse } = require('../models/dataWareHouseModel')
 const { User } = require('../models/user')
+const { BookingSchema } = require('../models/booking')
 
 const listIndicators = async (req, res) => {
   try {
@@ -81,10 +82,29 @@ const computeTopCustomers = (callback) => {
   })
 }
 
+const topRoom = (callback) => {
+  User.aggregate([
+    {
+      $group: {
+        _id: '$_id', total: { $sum: '$bookings.price' }
+      }
+    },
+    {
+      $sort: { total: -1 }
+    },
+    {
+      $limit: 1
+    }
+  ], function (err, res) {
+    callback(err, res)
+  })
+}
+
 module.exports = {
   listIndicators,
   lastIndicator,
   setRebuildPeriod,
   createDataWareHouseJob,
-  computeTopCustomers
+  computeTopCustomers,
+  topRoom
 }

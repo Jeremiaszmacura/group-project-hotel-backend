@@ -116,37 +116,6 @@ const createBooking = async (req, res) => {
   return res.json('Done')
 }
 
-const updateBooking = (req, res) => {
-  User.findOne({ _id: req.user._id }, (error, data) => {
-    if (error) {
-      console.log(error)
-      return res.status(500).json('something went wrong')
-    }
-    if (!data) {
-      return res.status(404).json({ error: 'No user found' })
-    }
-    const pos = data.bookings.map(function (e) {
-      return e._id.toString()
-    }).indexOf(req.params.id)
-    if (pos !== -1) {
-      // TODO przy zmianie daty sprawdź czy możliwe z roomCalendar + zmień tam
-      for (const field in req.body) {
-        data.bookings[pos][field] = req.body[field]
-      }
-      data.save()
-        .then(() => {
-          return res.status(200).json('Booking updated')
-        })
-        .catch((error) => {
-          console.log(error)
-          return res.status(500).json('something went wrong')
-        })
-    } else {
-      return res.status(200).json('No booking')
-    }
-  })
-}
-
 const removeBooking = async (req, res) => {
   User.findOne({ _id: req.user._id }, async (error, data) => {
     if (error) {
@@ -240,6 +209,5 @@ module.exports = {
   getUserAll,
   getOne,
   createBooking,
-  updateBooking,
   removeBooking
 }

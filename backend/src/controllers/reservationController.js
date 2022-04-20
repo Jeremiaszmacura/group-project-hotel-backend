@@ -62,10 +62,6 @@ const createReservation = (req, res) => {
   return res.json('createReservation')
 }
 
-const updateReservation = (req, res) => {
-  return res.json('updateReservation')
-}
-
 const removeReservation = (req, res) => {
   return res.json('removeReservation')
 }
@@ -75,6 +71,5 @@ module.exports = {
   getOne,
   getReservationsFilter,
   createReservation,
-  updateReservation,
   removeReservation
 }
