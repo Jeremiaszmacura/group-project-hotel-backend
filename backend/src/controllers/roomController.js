@@ -1,5 +1,4 @@
 const { RoomsCategory } = require('../models/roomsCategory')
-const { RoomSchema } = require('../models/room')
 
 const getAll = (req, res) => {
   RoomsCategory.find({}, (error, data) => {
@@ -21,7 +20,7 @@ const getOne = (req, res) => {
       return res.json('something went wrong')
     }
     if (!data) {
-      return res.json('No room in database')
+      return res.json('No category in database')
     }
     return res.json(data)
   })
@@ -111,16 +110,32 @@ const updateCategory = async (req, res) => {
 }
 
 const updateRoom = async (req, res) => {
-  try {
-    const data = await RoomSchema.findByIdAndUpdate({ _id: req.params.id }, req.body, { new: true, runValidators: true })
-    data ? res.json(data) : res.status(404).send()
-  } catch (err) {
-    if (err.name === 'ValidationError') {
-      res.status(422).send(err)
-    } else {
-      res.status(500).send(err)
+  RoomsCategory.find({}, async (error, data) => {
+    if (error) {
+      return res.json(error)
     }
-  }
+    if (!data) {
+      return res.json({ error: 'No room categories in database' })
+    }
+    for (let i = 0; i < data.length; i++) {
+      const pos = data[i].rooms.map(function (e) {
+        return e._id.toString()
+      }).indexOf(req.params.id)
+      if (pos !== -1) {
+        for (const field in req.body) {
+          data[i].rooms[pos][field] = req.body[field]
+        }
+        await data[i].save()
+          .then((data) => {
+            return res.status(200).json(data)
+          })
+          .catch((error) => {
+            console.log(error)
+            return res.status(500).json('something went wrong')
+          })
+      }
+    }
+  })
 }
 
 const removeCategory = (req, res) => {
@@ -134,6 +149,33 @@ const removeCategory = (req, res) => {
     }
     data.remove()
     return res.json('Category deleted')
+  })
+}
+
+const removeRoom = async (req, res) => {
+  RoomsCategory.find({}, async (error, data) => {
+    if (error) {
+      return res.json(error)
+    }
+    if (!data) {
+      return res.json({ error: 'No room categories in database' })
+    }
+    for (let i = 0; i < data.length; i++) {
+      const pos = data[i].rooms.map(function (e) {
+        return e._id.toString()
+      }).indexOf(req.params.id)
+      if (pos !== -1) {
+        data[i].rooms.splice(pos, 1)
+        await data[i].save()
+          .then((data) => {
+            return res.status(200).json(data)
+          })
+          .catch((error) => {
+            console.log(error)
+            return res.status(500).json('something went wrong')
+          })
+      }
+    }
   })
 }
 
@@ -168,5 +210,6 @@ module.exports = {
   createRoom,
   updateCategory,
   updateRoom,
-  removeCategory
+  removeCategory,
+  removeRoom
 }

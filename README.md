@@ -38,10 +38,11 @@
 |-----------------------------------|----------------------|---------------------------|
 | `GET` /restaurant/:id/menu        | `GET` /tables        | `GET` /reservation        |
 | `GET` /restaurant/:id/dish/:id    | `GET` /tables/:id    | `GET` /reservation/:id    |
-| `POST` /restaurant/:id/dish       | `GET` /tables/params | `GET` /reservation/params |
-| `POST` /restaurant                | `POST` /tables       | `POST` /reservation       |
-| `PATCH` /restaurant/:id           | `PUT` /tables/:id    | `DELETE` /reservation/:id |
-| `PUT` /restaurant/:id/dish/:id    | `DELETE` /tables/:id |                           |
+| `GET` /restaurant                 | `GET` /tables/params | `GET` /reservation/params |
+| `POST` /restaurant/:id/dish       | `POST` /tables       | `POST` /reservation       |
+| `POST` /restaurant                | `PUT` /tables/:id    | `DELETE` /reservation/:id |
+| `PUT` /restaurant/:id             | `DELETE` /tables/:id |                           |
+| `PUT` /restaurant/:id/dish/:id    |
 | `DELETE` /restaurant/:id/dish/:id |
 | `DELETE` /restaurant/:id          |
 

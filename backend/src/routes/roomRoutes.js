@@ -13,5 +13,6 @@ router.get('/:id', roomController.getOne)
 router.get('/rooms/:id', roomController.getOneRoom)
 router.put('/rooms/:id', roomController.updateRoom)
 router.delete('/:id', roomController.removeCategory)
+router.delete('/rooms/:id', roomController.removeRoom)
 
 module.exports = router
