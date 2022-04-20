@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.get('/', reservationController.getAll)
 router.get('/:id', reservationController.getOne)
-router.get('/search/', reservationController.getReservationsFilter)
+router.get('/params/', reservationController.getReservationsFilter)
 router.post('/', reservationController.createReservation)
 router.delete('/:id', reservationController.removeReservation)
 

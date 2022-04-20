@@ -352,7 +352,103 @@
 			"name": "Category",
 			"item": [
 				{
-					"name": "all categories",
+					"name": "get all rooms",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/categories/rooms",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"categories",
+								"rooms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get room by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/categories/rooms/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"categories",
+								"rooms",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "62430330ce34dfd916f23a09"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get category by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/categories/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"categories",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "62430315ce34dfd916f23a02"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get rooms filtered",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/categories/rooms/params?priceFrom=100&priceTo=160",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"categories",
+								"rooms",
+								"params"
+							],
+							"query": [
+								{
+									"key": "priceFrom",
+									"value": "100"
+								},
+								{
+									"key": "priceTo",
+									"value": "160"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all categories",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -369,7 +465,7 @@
 					"response": []
 				},
 				{
-					"name": "create roomCategory",
+					"name": "create category",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -422,28 +518,115 @@
 					"response": []
 				},
 				{
-					"name": "get rooms filtered",
+					"name": "update room",
 					"request": {
-						"method": "GET",
+						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"price\": 200\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{baseUrl}}/categories/rooms/params?priceFrom=100&priceTo=160",
+							"raw": "{{baseUrl}}/categories/rooms/:id",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"categories",
 								"rooms",
-								"params"
+								":id"
 							],
-							"query": [
+							"variable": [
 								{
-									"key": "priceFrom",
-									"value": "100"
-								},
+									"key": "id",
+									"value": "62430330ce34dfd916f23a09"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update category",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"features\": [\"feature1\", \"feature2\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/categories/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"categories",
+								":id"
+							],
+							"variable": [
 								{
-									"key": "priceTo",
-									"value": "160"
+									"key": "id",
+									"value": "62430315ce34dfd916f23a02"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove room",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/categories/rooms/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"categories",
+								"rooms",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "626058be3cc734f7527e4296"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/categories/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"categories",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "62430315ce34dfd916f23a02"
 								}
 							]
 						}
@@ -635,7 +818,7 @@
 								},
 								{
 									"key": "dishId",
-									"value": "624413d116c9cff3ed766eb0"
+									"value": "62441a0c6fe99980be5afd3b"
 								}
 							]
 						}
@@ -894,7 +1077,48 @@
 			"name": "Table",
 			"item": [
 				{
-					"name": "get seats filtered",
+					"name": "get tables",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/tables",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tables"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get table by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/tables/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tables",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "62605003878dd6ee9947718f"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get tables filtered",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -942,6 +1166,63 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "get table by id Copy",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tables/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tables",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "62605003878dd6ee9947718f"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get table by id Copy 2",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/tables/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tables",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "62605a4c67ba70d75935cd9f"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -949,12 +1230,122 @@
 			"name": "Reservation",
 			"item": [
 				{
-					"name": "localhost",
+					"name": "get all reservations",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "{{baseUrl}}/reservations",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reservations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get reservations by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/reservations/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reservations",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "sadsdsa"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get reservations filtered",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/reservations/params?startsAt=2021-04-10T00:00:00.000Z&endsAt=2021-04-11T00:00:00.000Z",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reservations",
+								"params"
+							],
+							"query": [
+								{
+									"key": "startsAt",
+									"value": "2021-04-10T00:00:00.000Z",
+									"description": "Wymagane cudzysłowy?"
+								},
+								{
+									"key": "endsAt",
+									"value": "2021-04-11T00:00:00.000Z",
+									"description": "Wymagane cudzysłowy?"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create reservation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"startsAt\": \"2021-04-20\",\r\n    \"endsAt\": \"2021-04-21\",\r\n    \"numberOfPeople\": 4,\r\n    \"tables\": [\"62605003878dd6ee9947718f\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/reservations",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reservations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove reservation",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/reservations/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reservations",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "dddd"
+								}
+							]
 						}
 					},
 					"response": []

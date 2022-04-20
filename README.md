@@ -34,14 +34,14 @@
 |                      |                        | `GET` /categories/:id          |
 
 
-| Restaurant                        | Table                | Reservation               |
-|-----------------------------------|----------------------|---------------------------|
-| `GET` /restaurant/:id/menu        | `GET` /tables        | `GET` /reservation        |
-| `GET` /restaurant/:id/dish/:id    | `GET` /tables/:id    | `GET` /reservation/:id    |
-| `GET` /restaurant                 | `GET` /tables/params | `GET` /reservation/params |
-| `POST` /restaurant/:id/dish       | `POST` /tables       | `POST` /reservation       |
-| `POST` /restaurant                | `PUT` /tables/:id    | `DELETE` /reservation/:id |
-| `PUT` /restaurant/:id             | `DELETE` /tables/:id |                           |
+| Restaurant                        | Table                | Reservation                |
+|-----------------------------------|----------------------|----------------------------|
+| `GET` /restaurant/:id/menu        | `GET` /tables        | `GET` /reservations        |
+| `GET` /restaurant/:id/dish/:id    | `GET` /tables/:id    | `GET` /reservations/:id    |
+| `GET` /restaurant                 | `GET` /tables/params | `GET` /reservations/params |
+| `POST` /restaurant/:id/dish       | `POST` /tables       | `POST` /reservations       |
+| `POST` /restaurant                | `PUT` /tables/:id    | `DELETE` /reservations/:id |
+| `PUT` /restaurant/:id             | `DELETE` /tables/:id |                            |
 | `PUT` /restaurant/:id/dish/:id    |
 | `DELETE` /restaurant/:id/dish/:id |
 | `DELETE` /restaurant/:id          |
