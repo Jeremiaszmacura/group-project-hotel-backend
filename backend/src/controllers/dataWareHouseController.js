@@ -51,9 +51,7 @@ const createDataWareHouseJob = () => {
       newDataWareHouse.topCustomers = results[0]
       newDataWareHouse.rebuildPeriod = rebuildPeriod
 
-      console.log('################3')
       await newDataWareHouse.save()
-      console.log('################4')
       console.log('new DataWareHouse succesfully saved. Date: ' + new Date())
     } catch (err) {
       console.log('Error computing DataWareHouse: ' + err)
@@ -62,7 +60,6 @@ const createDataWareHouseJob = () => {
 }
 
 const computeTopCustomers = (callback) => {
-  console.log('################1')
   User.aggregate([
     { $unwind: '$bookings' },
     {
@@ -75,9 +72,12 @@ const computeTopCustomers = (callback) => {
     },
     {
       $limit: 2
+    },
+    {
+      $project: { _id: 1 }
     }
   ], function (err, res) {
-    callback(err, res._id)
+    callback(err, res)
   })
 }
 

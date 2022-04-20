@@ -75,7 +75,7 @@ const createBooking = async (req, res) => {
     }).indexOf(req.body.roomsIds[i])
     price += allRooms[pos].price
   }
-  price *= (dateTo - dateFrom) / oneDay
+  price *= (dateTo - dateFrom) / oneDay + 1
   for (let i = 0; i <= (dateTo - dateFrom) / oneDay; i++) {
     RoomsCalendar.findOne({ date: new Date(dateFrom.getTime() + i * oneDay) }, async (error, data) => {
       if (error) {
@@ -147,8 +147,8 @@ const updateBooking = (req, res) => {
   })
 }
 
-const removeBooking = (req, res) => {
-  User.findOne({ _id: req.user._id }, (error, data) => {
+const removeBooking = async (req, res) => {
+  User.findOne({ _id: req.user._id }, async (error, data) => {
     if (error) {
       console.log(error)
       return res.status(500).json('something went wrong')
@@ -160,7 +160,23 @@ const removeBooking = (req, res) => {
       return e._id.toString()
     }).indexOf(req.params.id)
     if (pos !== -1) {
-      // TODO usuń z roomCalendar (zmień ID na null)
+      const dateFrom = new Date(data.bookings[pos].startsAt)
+      const dateTo = new Date(data.bookings[pos].endsAt)
+      const booking = data.bookings[pos]
+      for (let i = 0; i <= (dateTo - dateFrom) / oneDay; i++) {
+        const data2 = await RoomsCalendar.findOne({ date: new Date(dateFrom.getTime() + i * oneDay) })
+        if (error) {
+          console.log(error)
+          return res.json('something went wrong')
+        }
+        for (let j = 0; j < booking.rooms.length; j++) {
+          const pos2 = data2.rooms.map(function (e) {
+            return e.room.toString()
+          }).indexOf(booking.rooms[j].toString())
+          data2.rooms[pos2].user = null
+        }
+        await data2.save()
+      }
       data.bookings.splice(pos, 1)
       data.save()
         .then(() => {
