@@ -28,11 +28,25 @@ const getOne = (req, res) => {
 }
 
 const getTablesFilter = (req, res) => {
-  return res.json('getTablesFilter')
+  Table.find({ seats: { $gte: req.query.seats } }, (error, data) => {
+    if (error) {
+      console.log(error)
+      return res.status(500).json('something went wrong')
+    }
+    return res.json(data)
+  })
 }
 
 const createTable = (req, res) => {
-  return res.json('createTable')
+  const table = new Table(req.body)
+  table.save()
+    .then((data) => {
+      res.json(data)
+    })
+    .catch((error) => {
+      console.log(error)
+      return res.json('something went wrong')
+    })
 }
 
 const updateTable = async (req, res) => {
