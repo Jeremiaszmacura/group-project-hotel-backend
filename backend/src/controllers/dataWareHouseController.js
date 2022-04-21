@@ -45,9 +45,11 @@ const createDataWareHouseJob = () => {
     console.log('Cron job submitted. Rebuild period: ' + rebuildPeriod)
     try {
       const results = await async.parallel([
-        computeTopCustomers
+        computeTopCustomers,
+        topRooms
       ])
       newDataWareHouse.topCustomers = results[0]
+      newDataWareHouse.topRooms = results[1]
       newDataWareHouse.rebuildPeriod = rebuildPeriod
 
       await newDataWareHouse.save()
@@ -70,7 +72,7 @@ const computeTopCustomers = (callback) => {
       $sort: { total: -1 }
     },
     {
-      $limit: 2
+      $limit: 10
     },
     {
       $project: { _id: 1 }
@@ -80,19 +82,18 @@ const computeTopCustomers = (callback) => {
   })
 }
 
-const topRoom = (callback) => {
+const topRooms = (callback) => {
   User.aggregate([
     {
-      $group: {
-        _id: '$_id', total: { $sum: '$bookings.price' }
-      }
+      $group: { _id: '$bookings.rooms' }
     },
+    { $unwind: '$_id' },
+    { $unwind: '$_id' },
     {
-      $sort: { total: -1 }
+      $group: { _id: '$_id', total: { $sum: 1 } }
     },
-    {
-      $limit: 1
-    }
+    { $sort: { total: -1 } },
+    { $limit: 10 }
   ], function (err, res) {
     callback(err, res)
   })
@@ -104,5 +105,5 @@ module.exports = {
   setRebuildPeriod,
   createDataWareHouseJob,
   computeTopCustomers,
-  topRoom
+  topRooms
 }

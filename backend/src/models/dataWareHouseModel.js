@@ -5,6 +5,9 @@ const DataWareHouseSchema = new mongoose.Schema({
   topCustomers: [{
     type: Schema.Types.ObjectId
   }],
+  topRooms: [{
+    type: Schema.Types.ObjectId
+  }],
   computationMoment: {
     type: Date,
     default: Date.now
