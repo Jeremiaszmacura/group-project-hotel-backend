@@ -63,26 +63,25 @@ const getReservationsFilter = (req, res) => {
 const createReservation = async (req, res) => {
   const hourFrom = new Date(req.body.startsAt)
   const hourTo = new Date(req.body.endsAt)
-  req.body.dates.array.forEach(async date => {
-    for (let i = 0; i <= (hourTo - hourFrom) / oneHour; i++) {
-      for (let j = 0; j < req.body.tablesIds.length; j++) {
-        const checkAvability = await checkAvalibilityOfTable(res, req.body.tablesIds[j], new Date(hourFrom.getTime() + i * oneHour))
-        if (checkAvability === false) {
-          return res.json('Unavailable - already reserved')
-        }
+  for (let i = 0; i <= (hourTo - hourFrom) / oneHour; i++) {
+    for (let j = 0; j < req.body.tablesIds.length; j++) {
+      const checkAvability = await checkAvalibilityOfTable(res, req.body.tablesIds[j], new Date(hourFrom.getTime() + i * oneHour))
+      if (checkAvability === false) {
+        return res.json('Unavailable - already reserved')
       }
     }
-  })
+  }
 
   for (let i = 0; i <= (hourTo - hourFrom) / oneHour; i++) {
-    TablesCalendar.findOne({ hour: new Date(hourFrom.getTime() + i * oneHour) }, async (error, data) => {
+    TablesCalendar.findOne({ date: new Date(hourFrom.getTime() + i * oneHour) }, async (error, data) => {
+      console.log(data)
       if (error) {
         console.log(error)
         return res.json('something went wrong')
       }
       for (let j = 0; j < req.body.tablesIds.length; j++) {
-        const pos = data.tables.map(e => e.table.toString()).indexOf(req.body.tablesIds[j])
-        data.tables[pos].avalibility = false
+        const pos = data.tables.map(e => e._id.toString()).indexOf(req.body.tablesIds[j])
+        data.tables[pos].availability = false
       }
       await data.save()
     })
@@ -125,14 +124,14 @@ const removeReservation = (req, res) => {
       const hourTo = new Date(data.reservations[pos].endsAt)
       const reservation = data.reservations[pos]
       for (let i = 0; i <= (hourTo - hourFrom) / oneHour; i++) {
-        const data2 = await TablesCalendar.findOne({ hour: new Date(hourFrom.getTime() + i * oneHour) })
+        const data2 = await TablesCalendar.findOne({ date: new Date(hourFrom.getTime() + i * oneHour) })
         if (error) {
           console.log(error)
           return res.json('something went wrong')
         }
         for (let j = 0; j < reservation.tables.length; j++) {
-          const pos2 = data2.tables.map(e => e.room.toString()).indexOf(reservation.tables[j].toString())
-          data2.tables[pos2].avalibility = true
+          const pos2 = data2.tables.map(e => e._id.toString()).indexOf(reservation.tables[j].toString())
+          data2.tables[pos2].availability = true
         }
         await data2.save()
       }
@@ -161,9 +160,10 @@ const checkAvalibilityOfTable = async (res, tableId, hour) => {
     }
     for (let i = 0; i < allTables.length; i++) {
       tablesJson.tables = [...tablesJson.tables, {
-        id: allTables[i]._id,
+        id: allTables[i].id,
+        _id: allTables[i]._id,
         seats: allTables[i].seats,
-        avalibility: true
+        availability: true
       }]
     }
     tablesCalendar = new TablesCalendar(tablesJson)
@@ -172,10 +172,10 @@ const checkAvalibilityOfTable = async (res, tableId, hour) => {
     return true
   }
   const pos = tablesCalendar.tables.map(function (e) {
-    return e.table.toString()
+    return e._id.toString()
   }).indexOf(tableId)
   if (pos !== -1) {
-    if (!tablesCalendar.tables[pos].avalibility) {
+    if (!tablesCalendar.tables[pos].availability) {
       return false
     }
     return true

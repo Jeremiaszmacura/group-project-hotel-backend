@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f4ff1cd1-a7c4-4395-a5d1-e339c0818032",
+		"_postman_id": "a39c2ab7-c5e3-4c09-8c25-03780afddad0",
 		"name": "Hotel",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -1263,7 +1263,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "sadsdsa"
+									"value": "6262942f1fbc2db6a8b5fa99"
 								}
 							]
 						}
@@ -1276,7 +1276,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/reservations/params?startsAt=2021-04-10T00:00:00.000Z&endsAt=2021-04-11T00:00:00.000Z",
+							"raw": "{{baseUrl}}/reservations/params?startsAt=2021-04-19T00:00:00.000Z&endsAt=2021-04-21T00:00:00.000Z",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -1287,12 +1287,12 @@
 							"query": [
 								{
 									"key": "startsAt",
-									"value": "2021-04-10T00:00:00.000Z",
+									"value": "2021-04-19T00:00:00.000Z",
 									"description": "Wymagane cudzysłowy?"
 								},
 								{
 									"key": "endsAt",
-									"value": "2021-04-11T00:00:00.000Z",
+									"value": "2021-04-21T00:00:00.000Z",
 									"description": "Wymagane cudzysłowy?"
 								}
 							]
@@ -1303,11 +1303,21 @@
 				{
 					"name": "create reservation",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYyNWVlZTMwMDFhMTAyZmNmZTNlMmM1ZCIsImVtYWlsIjoiZW1haWxAZW1haWwuY29tIn0sImlhdCI6MTY1MDM4ODUzNX0.j-HODPhj8FC-R6lPw5Px_jZmVrwlOY4LM5olDqj6-Go",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"startsAt\": \"2021-04-20\",\r\n    \"endsAt\": \"2021-04-21\",\r\n    \"numberOfPeople\": 4,\r\n    \"tables\": [\"62605003878dd6ee9947718f\"]\r\n}",
+							"raw": "{\r\n    \"startsAt\": \"2021-04-21T20:00:00Z\",\r\n    \"endsAt\": \"2021-04-21T20:00:00Z\",\r\n    \"numberOfPeople\": 4,\r\n    \"tablesIds\": [\"62605003878dd6ee9947718f\"]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1329,6 +1339,16 @@
 				{
 					"name": "remove reservation",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYyNWVlZTMwMDFhMTAyZmNmZTNlMmM1ZCIsImVtYWlsIjoiZW1haWxAZW1haWwuY29tIn0sImlhdCI6MTY1MDM4ODUzNX0.j-HODPhj8FC-R6lPw5Px_jZmVrwlOY4LM5olDqj6-Go",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -1343,7 +1363,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "dddd"
+									"value": "62629a4a5342a7a8d7f32256"
 								}
 							]
 						}
