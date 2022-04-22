@@ -15,6 +15,7 @@ const commentRoutes = require('./routes/commentRoutes')
 const restaurantRoutes = require('./routes/restaurantRoutes')
 const tableRoutes = require('./routes/tableRoutes')
 const reservationRoutes = require('./routes/reservationRoutes')
+const dataWareHouseRoutes = require('./routes/dataWareHouseRoutes')
 
 // VARIABLES
 const app = express()
@@ -27,7 +28,7 @@ const port = process.env.APP_PORT || 4000;  // eslint-disable-line
 app.use(express.urlencoded({ extended: false })) // takes all url encoded data and parse to object, which we can use in request object (req.body)
 app.use(express.json()) // all data send to api will be able to access as a json
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Welcome to Hotel!')
 })
 app.use('/users', userRoutes)
 app.use('/bookings', bookingRoutes)
@@ -36,6 +37,7 @@ app.use('/comments', commentRoutes)
 app.use('/restaurant', restaurantRoutes)
 app.use('/tables', tableRoutes)
 app.use('/reservations', reservationRoutes)
+app.use('/dataWareHouse', dataWareHouseRoutes)
 app.use((req, res) => {
   res.status(404).send('404 Error')
 })
