@@ -2,10 +2,19 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const DataWareHouseSchema = new mongoose.Schema({
+  todaysCustomersNumber: {
+    type: Number
+  },
+  todaysAvgRating: {
+    type: Number
+  },
   topCustomers: [{
     type: Schema.Types.ObjectId
   }],
   topRooms: [{
+    type: Schema.Types.ObjectId
+  }],
+  bottomRooms: [{
     type: Schema.Types.ObjectId
   }],
   computationMoment: {
